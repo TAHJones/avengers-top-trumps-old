@@ -26,14 +26,11 @@ function showMarvelData(data) {
 }*/
 
 function marvelData(data) {
-    var marvelList = document.getElementById('marvelList');
-    /*var marvelListData = data.map(function(item) {
-        return `<li>${item}</li>`;
-    })*/
+    var marvelData = document.getElementById('marvelData');
     // marvelList.innerHTML = `<div>${data.toString()}</div>`
     
-    var marvelListData = data.data.results[10].name;
-    var marvelListData = data.data.results[10].description;
+    var marvelName = data.data.results[10].name;
+    var marvelDescription = data.data.results[10].description;
     
     var portraitSmall =	'50x75px';
     var portraitMedium = '100x150px';
@@ -41,28 +38,19 @@ function marvelData(data) {
     var portraitFantastic =	'168x252px';
     var portraitUncanny = '300x450px';
     var portraitIncredible = '216x324px';
-    var thumbnail = data.data.results[10].thumbnail.path;
-    var extension = data.data.results[10].thumbnail.extension;
-    var thumbnail = "http://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/portrait_xlarge.jpg";
+    var thumbnailPath = data.data.results[50].thumbnail.path;
+    // modifiy path name to https to avoid getting blocked mixed content
+    thumbnailPath = thumbnailPath.replace('http','https');
+    console.log(thumbnailPath);
+    var thumbnailExtension = data.data.results[50].thumbnail.extension;
+    // var thumbnail = "https://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/portrait_xlarge.jpg";
     
-    var imgPath = thumbnail + "/" + portraitLarge + "." + extension;
-    // for (var key in data) {
-    //     // skip loop if the property is from prototype
-    //     if (!data.hasOwnProperty(key)) continue;
-    
-    //     var obj = data[key];
-    //     for (var prop in obj) {
-    //         // skip loop if the property is from prototype
-    //         if(!obj.hasOwnProperty(prop)) continue;
-    
-    //         // your code
-    //         marvelListData += `<li>${prop}</li>`;
-    //         alert(prop + " = " + obj[prop]);
-    //     }
-        
-    // }
+    var fullThumbnailPath = thumbnailPath + "/" + portraitLarge + "." + thumbnailExtension;
+    console.log(fullThumbnailPath);
+
         // marvelList.innerHTML = marvelListData;
-        marvelList.innerHTML = `<img src="${imgPath}" alt="Superhero image"></img>`;
+        marvelData.innerHTML = `<div>${marvelName}</div><div>${marvelDescription}</div><img src="${fullThumbnailPath}" alt="Superhero image"></img>`;
+        // marvelList.innerHTML = `<img src="${thumbnail}" alt="Superhero image"></img>`;
         
 
 

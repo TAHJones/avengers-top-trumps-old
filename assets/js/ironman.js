@@ -3,7 +3,6 @@ var resourceType = 'characters';
 // var superHero = 'Spider-Man';
 var superHero = 'Iron Man';
 // var superHero = 'Captain America';
-// var superHero = 'Captain America/Steve Rogers'; can't find
 // var superHero = 'Hulk';
 // var superHero = 'Thor';
 // var superHero = 'Doctor Strange'; no description

@@ -38,7 +38,6 @@ currentSlide(dots);
 
 // accepts updated slideIndex value from prevSlide, nextSlide & currentSlide functions to change which slide is visible
 function showSlides(n) {
-  // var i;
   var slides = document.getElementsByClassName("slides"); // target all elements with 'slides' class name
   var dots = document.getElementsByClassName("dot"); // target all elelmts with 'dot' class name
   if (n > slides.length) {slideIndex = 1} // if slideIndex is > no. of slides reset to value of 1st slide
@@ -46,7 +45,7 @@ function showSlides(n) {
   for (var i = 0; i < slides.length; i++) { 
       slides[i].style.display = "none"; // loop through all slide elements and hide
   }
-  for (i = 0; i < dots.length; i++) {
+  for (var i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", ""); // loop through all dot divs and remove 'active' class name
   }
   slides[slideIndex-1].style.display = "block"; // make slides div with modifed slidesIndex no. visible

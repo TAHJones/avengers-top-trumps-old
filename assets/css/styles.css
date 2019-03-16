@@ -71,37 +71,53 @@ hr {
 * {box-sizing:border-box}
 
 /* Slideshow container */
-.img-slider {
+.hero-slider,
+.villain-slider {
   max-width: 1000px;
   position: relative;
   margin: auto;
 }
 
 /* Hide the images by default */
-.slides {
-  display: none;
+.hero-slider > .slides {
+    display: none;
+}
+
+/* style hero images */
+.hero-slider > .slides > img {
+  background-color: #000;
+  border: 4px solid #222;
+  border-radius: 6px;
+	display: block;
+	margin: 0 auto;
+	/*padding: 40px;*/
+	width: 95%;
 }
 
 /* Next & previous buttons */
 .prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+	cursor: pointer;
+	position: absolute;
+	top: 30%;
+	width: auto;
+	padding: 8px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+}
+
+/* Position the "prev button" to the left */
+.prev {
+  left: -40px;
 }
 
 /* Position the "next button" to the right */
 .next {
-  right: 0;
   border-radius: 3px 0 0 3px;
+  right: -40px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
@@ -111,23 +127,23 @@ hr {
 
 /* Caption text */
 .text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
+	background-color: rgba(0,0,0,0.5);
+	color: #ddd;
+	font-size: 20px;
+	margin: 16px auto;
+	padding: 12px;
+	width: 90%;
+	text-align: center;
 }
 
 /* Number text (1/3 etc) */
-.numbertext {
+/*.numbertext {
   color: #f2f2f2;
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;
   top: 0;
-}
+}*/
 
 /* The dots/bullets/indicators */
 .dot {

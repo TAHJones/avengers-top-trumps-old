@@ -79,12 +79,12 @@ hr {
 }
 
 /* Hide the images by default */
-.hero-slider > .slides {
-    display: none;
+.hero-slider .slides {
+    display: block;
 }
 
 /* style hero images */
-.hero-slider > .slides > img {
+.hero-slider .slides > img {
   background-color: #000;
   border: 4px solid #222;
   border-radius: 6px;

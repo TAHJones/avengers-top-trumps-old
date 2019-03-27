@@ -24,9 +24,9 @@ var supervillainList; // declare global variable for superhero object data
 
 // callback function that retrieves object data from getCharacterData function
 function showCharacterData(data) {
-    // characterData(data);
     superheroList = data.superheros;
-    supervillainList = data.supervillainss;
+    supervillainList = data.supervillains;
+    showSlides(slideIndex);
 }
 
 // target anchor element with 'prev' class
@@ -35,7 +35,7 @@ var prevSlide = document.getElementById('prev');
 // add click eventlistener to target div with 'prev' class
 prevSlide.addEventListener('click', function() {
   slideIndex = slideIndex - 1; // decrease slideIndex value by 1 so previous slide is made visible by showSlides function
-  showSlides(slideIndex);
+  showSlides(slideIndex); // run showSlide function to set default slide image
 }, false);
 
 // target anchor element with 'next' class
@@ -64,7 +64,6 @@ function currentSlide(n) {
 currentSlide(dots);
 
 function showSlides(n) {
-    console.log(superheroList.length);
     if (n > superheroList.length) {slideIndex = 1} // if slideIndex is > no. of slides reset to value of 1st slide
     if (n < 1) {slideIndex = superheroList.length} // if slideIndex is < 1 reset value to value of last slide
      
@@ -73,15 +72,13 @@ function showSlides(n) {
      }
 
     dots[slideIndex-1].className += " active"; // add 'active' class name to dots div that matches modifed slidesIndex no. 
-    console.log((dots[slideIndex-1]));
 
     var slideImg = document.getElementById('slideImg');
     var slideInfo = document.getElementById('slideInfo');  
     
     for (var i=0; i < superheroList.length; i++) { // loop through superhero array of objects
         superheroList[i].index = i + 1; // assign a index number to each object in array, starting at 1
-        // console.log(superheroList[i].index);
-        
+
         if(superheroList[i].index === slideIndex) { // if object index no. equals slideIndex add to index.html
             var id = superheroList[i].id;
             var name = superheroList[i].name;
@@ -110,6 +107,5 @@ function showSlides(n) {
 // only run script when page is fully loaded 
 window.addEventListener('load', function() {
     getCharacterData(showCharacterData);
-    // heroSlider();
 }, false);
 

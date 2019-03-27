@@ -84,7 +84,7 @@ hr {
 }
 
 /* style hero images */
-.hero-slider .slides > img {
+#slideImg > img {
   background-color: #000;
   border: 4px solid #222;
   border-radius: 6px;

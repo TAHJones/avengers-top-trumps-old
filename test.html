@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Avengers top trumps game. Single page web app built using Marvel API">
+  <meta name="author" content="Thomas Jones">
+  <title>Jasmine Testing</title>
+
+  <!--load fonts-->
+  <!--<link href="https://fonts.googleapis.com/css?family=Cabin|Chakra+Petch|Roboto" rel="stylesheet">-->
+
+  <!--load stylesheets-->
+  <link rel="stylesheet" href="assets/css/grid.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+
+  <!--load jasmine framework-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/jasmine.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/jasmine-html.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/boot.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/jasmine.css" />
+
+  <!--load scripts-->
+  <script type="text/javascript" src="assets/data/characters2.js"></script>
+  <script type="text/javascript" src="assets/jasmine/mock-ajax/mock-ajax.js"></script>
+  <!--<script type="text/javascript" src="assets/jasmine/custom-matchers/dom-matchers.js"></script>-->
+  <!--<script type="text/javascript" src="assets/jasmine/src/getCharacterDataSrc2.js"></script>-->
+  <script type="text/javascript" src="assets/jasmine/src/exampleSrc.js"></script>
+  <!--<script type="text/javascript" src="Untitled.js"></script>-->
+
+  <!--load tests-->
+  <!--<script type="text/javascript" src="assets/js/character.js"></script>-->
+  <!--<script type="text/javascript" src="assets/jasmine/spec/getCharacterDataSpec2.js"></script>-->
+  <script type="text/javascript" src="assets/jasmine/spec/exampleSpec.js"></script>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col col-xs-6 col-xs-offset-3">
+
+      <!-- Slideshow container -->
+      <div class="hero-slider">
+
+        <div class="image-slider">
+          <div id="slideImg"></div>
+          <div id="slideInfo"></div>
+          <button id="selectHeroButton" class="select-hero-button" type="button">Select Hero</button>
+          <a id="prev" class="prev">&#10094;</a>
+          <a id="next" class="next">&#10095;</a>
+        </div><!--image-slider-->
+
+        <!-- The dots/circles -->
+        <div id="slideSelector" style="text-align:center">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div><!--slideSelector-->
+
+      </div><!--hero-slider-->
+    </div><!--col-->
+
+    <div class="col col-xs-4 col-xs-offset-1">
+      <!-- Slideshow container -->
+      <div id="selectedHeroSlide" class="selected-hero-slide"></div>
+    </div><!--col-->
+
+  </div><!--row-->
+</body>
+</html>

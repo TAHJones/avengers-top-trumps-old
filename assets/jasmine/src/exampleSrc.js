@@ -11,10 +11,14 @@ function getSuperheroes(data) {
     case "":
     case 0:
     case "0":
-    case null:
-    case false:
       alert("Error! Function parameter is empty");
-      break;
+      return data;
+    case null:
+      alert("Error! Function parameter is null");
+      return data;
+    case false:
+      alert("Error! Function parameter is false");
+      return data;
     default:
       switch(typeof(data)) { // return an error for all data types other than object
         case "undefined":
@@ -28,7 +32,7 @@ function getSuperheroes(data) {
           break;
         case "string":
           alert("Error! Function parameter is a string");
-          break;
+          return data;
         case "object":
           console.log("Success! Function parameter is an object");
           return data.superheroes; // return list of superheroes
@@ -36,6 +40,9 @@ function getSuperheroes(data) {
   }
 }
 
+// var myString = "ddd555vvvvvAAA";
+// console.log(getSuperheroes(myString));
+// console.log(getSuperheroes(null));
 // console.log(typeof(marvelCharacters));
 // console.log(getSuperheroes(marvelCharacters));
 // getSuperheroes(marvelCharacters);

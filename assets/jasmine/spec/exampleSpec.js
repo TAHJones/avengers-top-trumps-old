@@ -1,21 +1,21 @@
-// describe("Calculator", function() {
-//     describe("Addition tests", function() {
-//         it("should return 42", function() {
-//             expect(addition(20, 22)).toBe(42);
-//         });
-//         it("should return 26", function() {
-//             expect(addition(7, 19)).toBe(26);
-//         });
-//         it("should return an error if we don't supply two numbers", function() {
-//             spyOn(window, "alert");
-//             addition("Hitchhikers", "Guide");
-//             expect(window.alert).toHaveBeenCalledWith("Error!");
+/*describe("Calculator", function() {
+    describe("Addition tests", function() {
+        it("should return 42", function() {
+            expect(addition(20, 22)).toBe(42);
+        });
+        it("should return 26", function() {
+            expect(addition(7, 19)).toBe(26);
+        });
+        it("should return an error if we don't supply two numbers", function() {
+            spyOn(window, "alert");
+            addition("Hitchhikers", "Guide");
+            expect(window.alert).toHaveBeenCalledWith("Error!");
 
 
-//         });
-//     });
-// });
-
+        });
+    });
+});
+*/
 // describe("suite wide usage", function() {
 //     beforeEach(function() {
 //       jasmine.Ajax.install();
@@ -54,7 +54,7 @@
 
  /*global marvelCharacters getSuperheroes getSuperhero expect spyOn getSupervillains getSupervillain */
 describe("AVENGERS TOP TRUMPS", function() {
-  describe("Object containing list of superheroes", function() {
+  describe("object containing list of superheroes", function() {
     it("should retrieve object containing list of superheroes and their catergory scores", function() {
       var superheroesList = {
         antman: {
@@ -196,59 +196,78 @@ describe("AVENGERS TOP TRUMPS", function() {
       var superHeroes = getSuperheroes(marvelCharacters); // getSuperheroes function that retrieves list of superheros from marvelcharacters object
       expect(superHeroes).toEqual(superheroesList);
     });
-    it('should return an error if function parameter is ""', function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      getSuperheroes(""); // call getSuperheroes function with undefined as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
-    });
-    it('should return an alert message if function parameter is 0', function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      getSuperheroes(0); // call getSuperheroes function with undefined as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
-    });
-    it('should return an alert message if function parameter is "0"', function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      getSuperheroes("0"); // call getSuperheroes function with undefined as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
-    });
-    it('should return an alert message if function parameter is null', function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      getSuperheroes(null); // call getSuperheroes function with undefined as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
-    });
-    it('should return an alert message if function parameter is false', function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      getSuperheroes(false); // call getSuperheroes function with undefined as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
-    });
-    it("should return an alert message if function parameter is undefined", function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      getSuperheroes(undefined); // call getSuperheroes function with undefined as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is undefined");
-    });
-    it("should return an alert message if function parameter is a function", function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      var myFunction = function(){return "this is a function"};
-      getSuperheroes(myFunction); // call getSuperheroes function with function as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is a function");
-    });
-    it("should return an alert message if function parameter is a number", function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      var myNumber = 444.444;
-      getSuperheroes(myNumber); // call getSuperheroes function with number as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is a number");
-    });
-    it("should return an alert message if function parameter is a string", function() {
-      spyOn(window, "alert"); // spy on window object alert method
-      var myString = "fhdksksxlflskasjiwowsa";
-      getSuperheroes(myString); // call getSuperheroes function with string as parameter
-      expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is a string");
-    });
     it('should return "Tom" if function parameter is an object with property name "superheroes"', function() {
-      spyOn(window, "alert"); // spy on window object confirm method
       var myObject = {superheroes: "Tom"};
       var superTomsSecretIdentity = getSuperheroes(myObject); // call getSuperheroes function with object as parameter
       expect(superTomsSecretIdentity).toEqual("Tom");
+    });
+  // });
+    describe("alert messages for function calls with empty parameter", function() {
+      beforeEach(function(){
+        spyOn(window, "alert"); // add spy on window object alert method before specs
+      });
+      it('should return an alert message if function parameter is ""', function() {
+        getSuperheroes(""); // call getSuperheroes function with undefined as parameter
+        expect(getSuperheroes("")).toBeFalsy();
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
+      });
+      it('should return an alert message if function parameter is 0', function() {
+        getSuperheroes(0); // call getSuperheroes function with undefined as parameter
+        expect(getSuperheroes(0)).toBeFalsy();
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
+      });
+      it('should return an alert message if function parameter is "0"', function() {
+        getSuperheroes("0"); // call getSuperheroes function with undefined as parameter
+        expect(getSuperheroes("0")).not.toBeFalsy();
+        expect(getSuperheroes("0")).toMatch(/^\d$/); // match any string containing single digit character using regular expression
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
+      });
+      it('should return an alert message if function parameter is null', function() {
+        getSuperheroes(null); // call getSuperheroes function with undefined as parameter
+        expect(getSuperheroes(null)).toBeNull();
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is null");
+      });
+      it('should return an alert message if function parameter is false', function() {
+        getSuperheroes(false); // call getSuperheroes function with undefined as parameter
+        expect(getSuperheroes(false)).toBeFalsy();
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is false");
+      });
+    });
+    describe("alert messages for function calls with wrong data type as parameter", function() {
+      var myFunction = function(){return "this is a function"};
+      var myNumber = 333.333;
+      var myString = "fhdk65sksxl4lskasjiw9wsaZ";
+      beforeEach(function(){
+        spyOn(window, "alert"); // add spy on window object alert method before specs
+      });
+      it("should return an alert message if function parameter is undefined", function() {
+        getSuperheroes(undefined); // call getSuperheroes function with undefined as parameter
+        expect(getSuperheroes(undefined)).not.toBeDefined();
+        expect(getSuperheroes(undefined)).toBeUndefined();
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is undefined");
+      });
+      it("should return an alert message if function parameter is a function", function() {
+        getSuperheroes(myFunction); // call getSuperheroes function with function as parameter
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is a function");
+      });
+      it("should return an alert message if function parameter is a number", function() {
+        getSuperheroes(myNumber); // call getSuperheroes function with number as parameter
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is a number");
+      });
+      it("should return an alert message if function parameter is a string", function() {
+        getSuperheroes(myString); // call getSuperheroes function with string as parameter
+        expect(myString).toMatch(/\w*/); // match any string containing alphanumeric characters using regular expression
+        expect(window.alert).toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is a string");
+      });
     });
   });
 
@@ -271,7 +290,7 @@ describe("AVENGERS TOP TRUMPS", function() {
     });
   });
 
-  describe("Object containing list of supervillains", function() {
+  describe("object containing list of supervillains", function() {
     it("should retrieve object containing list of supervillains and their catergory scores", function() {
       var supervillainsList = {
       blackdwarf: {
@@ -413,7 +432,13 @@ describe("AVENGERS TOP TRUMPS", function() {
       var superVillains = getSupervillains(marvelCharacters); // getSupervillains function that retrieves list of supervillains from marvelCharacters object
       expect(superVillains).toEqual(supervillainsList);
     });
-    it('should return an error if function parameter is "" ', function() {
+    it('should return "Evil Tom" if function parameter is an object with property name "supervillains"', function() {
+      // spyOn(window, "alert"); // spy on window object confirm method
+      var myObject = {supervillains: "Evil Tom"};
+      var evilTomsSecretIdentity = getSupervillains(myObject); // call getSupervillains function with object as parameter
+      expect(evilTomsSecretIdentity).toEqual("Evil Tom");
+    });
+    it('should return an alert message if function parameter is "" ', function() {
       spyOn(window, "alert"); // spy on window object alert method
       getSupervillains(""); // call getSuperheroes function with undefined as parameter
       expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is empty");
@@ -460,12 +485,6 @@ describe("AVENGERS TOP TRUMPS", function() {
       var myString = "fhdksksxlflskasjiwowsa";
       getSupervillains(myString); // call getSuperheroes function with string as parameter
       expect(window.alert).toHaveBeenCalledWith("Error! Function parameter is a string");
-    });
-    it('should return "Evil Tom" if function parameter is an object with property name "supervillains"', function() {
-      spyOn(window, "alert"); // spy on window object confirm method
-      var myObject = {supervillains: "Evil Tom"};
-      var evilTomsSecretIdentity = getSupervillains(myObject); // call getSupervillains function with object as parameter
-      expect(evilTomsSecretIdentity).toEqual("Evil Tom");
     });
   });
 

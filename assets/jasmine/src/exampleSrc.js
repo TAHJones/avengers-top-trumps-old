@@ -66,10 +66,14 @@ function getSupervillains(data) {
     case "":
     case 0:
     case "0":
-    case null:
-    case false:
       alert("Error! Function parameter is empty");
-      break;
+      return data;
+    case null:
+      alert("Error! Function parameter is null");
+      return data;
+    case false:
+      alert("Error! Function parameter is false");
+      return data;
     default:
       switch(typeof(data)) { // return an error for all data types other than object
         case "undefined":
@@ -83,7 +87,7 @@ function getSupervillains(data) {
           break;
         case "string":
           alert("Error! Function parameter is a string");
-          break;
+          return data;
         case "object":
           console.log("Success! Function parameter is an object");
           return data.supervillains; // return list of supervillains
@@ -109,3 +113,4 @@ function getSupervillain(name) { // enter supervillain name as function paramete
 // console.log(drdoom);
 
 // console.log(getSupervillains(marvelCharacters));
+// console.log(getSupervillains(0));

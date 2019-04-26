@@ -78,16 +78,18 @@ hr {
   margin: auto;
 }
 
-.slide {
-	/*background-color: #376554;*/
+
+.image-slider {
+	/* background-color: #376554; */
 	background-color: #4b5f57;
 	border: solid 6px #666;
 	border-radius: 6px;
 	margin: 0 auto;
 	padding: 20px;
 	padding-top: 24px;
-	height: 460px;
-	width: 260px;
+	position: relative;
+	height: 530px;
+	width: 280px;
 }
 /* Hide the images by default */
 /*.hero-slider .slides {
@@ -150,6 +152,43 @@ hr {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
+}
+
+/*styles for select-hero button*/
+/*.select-hero {
+	background-color: #000;
+	border: outset 2px #fff;
+	border-radius: 8px;
+	color: #4CAF50;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 20px auto;
+	padding: 8px 12px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.25s ease-in-out;
+}*/
+
+.select-hero {
+	background-color: #000;
+	border: solid 4px #222;
+	border-radius: 6px;
+	color: #4CAF50;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 20px auto;
+	padding: 8px 12px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.25s ease-in-out;
+}
+
+.select-hero:hover {
+	background-color: #4CAF50;
+	color: #000;
+	border-color: #000;
 }
 
 /* Caption text */

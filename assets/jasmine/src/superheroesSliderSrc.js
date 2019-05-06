@@ -26,7 +26,7 @@ function getSuperheroes(data) {
           alert("Error! Function parameter is a string");
           return data;
         case "object":
-          console.log("Success! Function parameter is an object");
+          // console.log("Success! Function parameter is an object");
           return data.superheroes; // return object of superhero names and abilities
       }
   }
@@ -85,6 +85,13 @@ function getSupervillains(data) {
   }
 }
 
+// getSupervillainList function converts supervillain object data into array of supervillain property names
+function getSupervillainList() {
+  var superVillains = getSupervillains(marvelCharacters);
+  var supervillainList = Object.keys(superVillains);
+  return supervillainList; // return array of supervillain names
+}
+
 function getSupervillain(name) { // enter supervillain name as function parameter
   var superVillains = getSupervillains(marvelCharacters); // get list of supervillains
   var superVillain = superVillains[name]; // select supervillain from superVillains object with bracket notation using function parameter
@@ -97,15 +104,15 @@ function getSupervillain(name) { // enter supervillain name as function paramete
   this.technology = superVillain.technology;
 }
 
-var slideIndex = 1; // set default value to show first slide
+var slideIndex = 0; // set default value to show first slide
 
 // target anchor element with 'prev' class
 var prevSlide = document.getElementById('prev');
 
 // add click eventlistener to target div with 'prev' class
 prevSlide.addEventListener('click', function() {
-  slideIndex = slideIndex - 1; // decrease slideIndex value by 1 so previous slide is made visible by showSlides function
-  showSlides(slideIndex); // decrease slideIndex value by 1 so previous slide is made visible by showSlides function
+  slideIndex = slideIndex - 1; // decrease slideIndex value by 1 so previous slide is made visible by showSuperhero function
+  showSuperhero(slideIndex); // decrease slideIndex value by 1 so previous slide is made visible by showSuperhero function
 }, false);
 
 // target anchor element with 'next' class
@@ -113,28 +120,36 @@ var nextSlide = document.getElementById('next');
 
 // add click eventlistener to target div with 'prev' class
 nextSlide.addEventListener('click', function() {
-  slideIndex = slideIndex + 1; // increase slideIndex value by 1 so next slide is made visible by showSlides function
-  showSlides(slideIndex);
+  slideIndex = slideIndex + 1; // increase slideIndex value by 1 so next slide is made visible by showSuperhero function
+  showSuperhero(slideIndex);
 }, false);
 
 var dots = document.getElementsByClassName("dot"); // target all elements with 'dot' class name
+var hideDots = document.getElementById("dotSelector");
+// console.log(typeof(hideDots));
 
-// get index number of clicked 'dot' div and send to showSlides function
-function currentSlide(n) {
+// get index number of clicked 'dot' div and send to showSuperhero function
+(function currentSlide(n) {
   for(var i=0; i < n.length; i++) {
     n[i].index = i; // use loop counter to set the index number for each div element
     n[i].addEventListener('click', function(e) { // add 'click' event listerner to div elements
       var dotIndex = e.target.index + 1; // get index number of clicked dot & change index base number to 1 to match  slideIndex number
-      showSlides(slideIndex = dotIndex); // send clicked dot index number to showSlides function
+      showSuperhero(slideIndex = dotIndex); // send clicked dot index number to showSuperhero function
     }, false);
   }
-}
+})(dots); // run currentSlide IIFE function as with collection of 'dot' divs
 
-currentSlide(dots); // run currentSlide function with collection of 'dot' divs
+// currentSlide(dots); // run currentSlide IIFE function as with collection of 'dot' divs
 
-var selectedSuperhero; // declare selectedSuperhero in global scope
+// var selectedSuperhero; // declare selectedSuperhero in global scope
 
-function showSlides(n) {
+/*var randomNumber = function () {
+  return Math.floor(Math.random() * 15); // generate a random number between 0 and 14 to match index of slides
+}*/
+    // var selectHero = document.getElementById('selectHero');
+    // console.log(selectHero.textContent);
+
+function showSuperhero(n) {
     var superheroList = getSuperheroList();
     if (n > superheroList.length) {slideIndex = 1} // if slideIndex is > no. of slides reset to value of 1st slide
     if (n < 1) {slideIndex = superheroList.length} // if slideIndex is < 1 reset value to value of last slide
@@ -145,10 +160,10 @@ function showSlides(n) {
 
     dots[slideIndex-1].className += " active"; // add 'active' class name to dots div that matches modifed slidesIndex no.
 
-    var slideImg = document.getElementById('slideImg');
-    var slideInfo = document.getElementById('slideInfo');
-    var selectHeroButton = document.getElementById('selectHeroButton');
-    var selectedHeroSlide = document.getElementById('selectedHeroSlide');
+    var heroImg = document.getElementById('heroImg');
+    var heroInfo = document.getElementById('heroInfo');
+    // var selectHero = document.getElementById('selectHero');
+    // console.log(selectHero.textContent);
 
     // use slideIndex number -1 as index no. of return array from getSuperheroList function to select individual superhero property name
     var superheroName = getSuperheroList()[slideIndex-1];
@@ -156,11 +171,8 @@ function showSlides(n) {
     // use getSuperhero constructer function with superheroName variable as parameter to get superhero object data
     var superhero = new getSuperhero(superheroName); // add object data to superhero variable
 
-    // use slideIndex number -1 as parameter of getSuperheroList function to select individual superhero name
-    var image = getSuperheroList()[slideIndex-1];
-    console.log(image);
-
-    var name = superhero.name; // use object dot notation on superhero variable to access object properties and add to corresponding variable
+    // use object dot notation on superhero variable to access object properties and add to corresponding variable
+    var name = superhero.name;
     var agility = superhero.agility;
     var intelligence = superhero.intelligence;
     var magic = superhero.magic;
@@ -168,22 +180,104 @@ function showSlides(n) {
     var speed = superhero.speed;
     var technology = superhero.technology;
 
-    // add superhero property name into template literal HTML image path and insert into slideImg div
-    slideImg.innerHTML = `<img src="assets/img/${superheroName}.png">`;
+    // add superhero property name into template literal HTML image path and insert into heroImg div
+    heroImg.innerHTML = `<img src="assets/img/${superheroName}.png">`;
+
+    // replace inactive styles with active styles when character is selected
+    // selectHeroButton.className = "select-hero select-hero-active";
+
+    // add object property values to template literal HTML and insert into heroInfo div
+    heroInfo.innerHTML = `<h2>${name}</h2>
+                            <ul id="heroList" class="hero-list">
+                                <li><a class="hero-list-active">Agility: ${agility}</a></li>
+                                <li><a class="hero-list-active">Intelligence: ${intelligence}</a></li>
+                                <li><a class="hero-list-active">Magic: ${magic}</a></li>
+                                <li><a class="hero-list-active">Strength: ${strength}</a></li>
+                                <li><a class="hero-list-active">Speed: ${speed}</a></li>
+                                <li><a class="hero-list-active">Technology: ${technology}</a></li>
+                            </ul>`;
+
+    var heroInfoLink = document.getElementById("heroList");
+    var heroInfoList = document.querySelectorAll(".hero-list a");
+    var selectHeroButton = document.getElementById('selectHeroButton');
+
+    // add selected styles to selected catergory
+    heroInfoLink.addEventListener('click', function(e){
+      if(e.target.className === "hero-list-active"){
+        e.target.className = "selected-catergory";
+      }
+      // add inactive styles to unselected catergories
+      for(var i=0; i<heroInfoList.length; i++){
+        // console.log(heroInfoList[i]);
+        if(heroInfoList[i].className === "hero-list-active"){
+          heroInfoList[i].className = "hero-list-inactive";
+          // console.log(heroInfoList[i]);
+        }
+      }
+      // replace inactive styles with active styles when superhero catergory is selected
+      selectHeroButton.className = "select-hero select-hero-active";
+
+    }, false);
+
+    selectHeroButton.addEventListener('click', function(){
+      if(selectHeroButton.className === "select-hero select-hero-active"){
+        // add superhero name to 'selectHero' button
+        selectHeroButton.textContent = `${name}`;
+        // selectHeroButton.style.border = "4px solid #ecec4d";
+        selectHeroButton.className = "select-hero select-hero-selected";
+        heroImg.firstElementChild.style.border = "4px solid #ecec4d";
+        hideDots.style.visibility = "hidden";
+        prevSlide.style.visibility = "hidden";
+        nextSlide.style.visibility = "hidden";
+        selectVillain.className = "select-villain select-villain-active";
+        // console.log(heroImg.firstElementChild);
+      }
+    }, false);
+
+}
+
+
+
+function showSupervillain() {
+    var villainImg = document.getElementById('villainImg');
+    var villainInfo = document.getElementById('villainInfo');
+    var randomNumber =  Math.floor(Math.random() * 15); // generate a random number between 0 and 14 to match index of slides
+
+    // use randomNumber variable as index no. of return array from getSupervillainList function to randomly select individual supervillain property name
+    var supervillainName = getSupervillainList()[randomNumber];
+
+    // use getSupervillain constructer function with supervillainName variable as parameter to get supervillain object data
+    var supervillain = new getSupervillain(supervillainName); // add object data to supervillain variable
+
+    var name = supervillain.name; // use object dot notation on superhero variable to access object properties and add to corresponding variable
+    var agility = supervillain.agility;
+    var intelligence = supervillain.intelligence;
+    var magic = supervillain.magic;
+    var strength = supervillain.strength;
+    var speed = supervillain.speed;
+    var technology = supervillain.technology;
+
+    // add supervillain property name into template literal HTML image path and insert into villainImg div
+    villainImg.innerHTML = `<img src="assets/img/${supervillainName}.png">`;
 
     // add object property values to template literal HTML and insert into slideInfo div
-    slideInfo.innerHTML = `<h2>${name}</h2>
-                            <ul>
-                                <li>Agility: ${agility}</li>
-                                <li>Intelligence: ${intelligence}</li>
-                                <li>Magic: ${magic}</li>
-                                <li>Strength: ${strength}</li>
-                                <li>Speed: ${speed}</li>
-                                <li>Technology: ${technology}</li>
+    villainInfo.innerHTML = `<h2>${name}</h2>
+                            <ul class="villain-list">
+                                <li><a class="villain-list-inactive">Agility: ${agility}</a></li>
+                                <li><a class="villain-list-inactive">Intelligence: ${intelligence}</a></li>
+                                <li><a class="villain-list-inactive">Magic: ${magic}</a></li>
+                                <li><a class="villain-list-inactive">Strength: ${strength}</a></li>
+                                <li><a class="villain-list-inactive">Speed: ${speed}</a></li>
+                                <li><a class="villain-list-inactive">Technology: ${technology}</a></li>
                             </ul>`;
 }
 
-// run showSlides function with inital slideIndex value when page is fully loaded
-window.addEventListener('load', function() {
-    showSlides(slideIndex);
-}, false);
+var selectVillain = document.getElementById('selectVillainButton'); // target select villain button when active
+// console.log(selectVillain);
+selectVillain.addEventListener('click', showSupervillain, false);
+// showSupervillain();
+
+// run showSuperhero function with inital slideIndex value when page is fully loaded
+/*window.addEventListener('load', function() {
+    showSuperhero(slideIndex);
+}, false);*/

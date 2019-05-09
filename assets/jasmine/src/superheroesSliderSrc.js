@@ -189,17 +189,29 @@ function showSuperhero(n) {
     // add object property values to template literal HTML and insert into heroInfo div
     heroInfo.innerHTML = `<h2>${name}</h2>
                             <ul id="heroList" class="hero-list">
-                                <li><a class="hero-list-active">Agility: ${agility}</a></li>
-                                <li><a class="hero-list-active">Intelligence: ${intelligence}</a></li>
-                                <li><a class="hero-list-active">Magic: ${magic}</a></li>
-                                <li><a class="hero-list-active">Strength: ${strength}</a></li>
-                                <li><a class="hero-list-active">Speed: ${speed}</a></li>
-                                <li><a class="hero-list-active">Technology: ${technology}</a></li>
+                              <li><a class="hero-list-active">Agility: ${agility}</a></li>
+                              <li><a class="hero-list-active">Intelligence: ${intelligence}</a></li>
+                              <li><a class="hero-list-active">Magic: ${magic}</a></li>
+                              <li><a class="hero-list-active">Strength: ${strength}</a></li>
+                              <li><a class="hero-list-active">Speed: ${speed}</a></li>
+                              <li><a class="hero-list-active">Technology: ${technology}</a></li>
                             </ul>`;
 
     var heroInfoLink = document.getElementById("heroList");
     var heroInfoList = document.querySelectorAll(".hero-list a");
     var selectHeroButton = document.getElementById('selectHeroButton');
+
+    // selectHeroButton.textContent = `Select Hero`;
+
+    /*if(selectHeroButton.classList.contains("select-hero-selected")){
+      selectHeroButton.textContent = `${name}`;
+    }*/
+
+    // each time a new hero is selected reset css styles to inactive if set to active
+    if(selectHeroButton.className = "select-hero select-hero-active"){
+      selectHeroButton.className = "select-hero select-hero-inactive";
+      // selectHeroButton.textContent = `Select Hero`;
+    }
 
     // add selected styles to selected catergory
     heroInfoLink.addEventListener('click', function(e){
@@ -215,23 +227,25 @@ function showSuperhero(n) {
         }
       }
       // replace inactive styles with active styles when superhero catergory is selected
-      selectHeroButton.className = "select-hero select-hero-active";
-
+      if(selectHeroButton.classList.contains("select-hero-selected")){
+        selectHeroButton.className = "select-hero select-hero-selected";
+      } else if ("select-hero select-hero-inactive"){
+        selectHeroButton.className = "select-hero select-hero-active";
+      }
     }, false);
 
+    // change hero image border and button styles when hero is selected
     selectHeroButton.addEventListener('click', function(){
-      if(selectHeroButton.className === "select-hero select-hero-active"){
         // add superhero name to 'selectHero' button
         selectHeroButton.textContent = `${name}`;
-        // selectHeroButton.style.border = "4px solid #ecec4d";
+        selectHeroButton.style.border = "4px solid #ecec4d";
         selectHeroButton.className = "select-hero select-hero-selected";
         heroImg.firstElementChild.style.border = "4px solid #ecec4d";
         hideDots.style.visibility = "hidden";
         prevSlide.style.visibility = "hidden";
         nextSlide.style.visibility = "hidden";
-        selectVillain.className = "select-villain select-villain-active";
+        selectVillainButton.className = "select-villain select-villain-active";
         // console.log(heroImg.firstElementChild);
-      }
     }, false);
 
 }
@@ -262,20 +276,81 @@ function showSupervillain() {
 
     // add object property values to template literal HTML and insert into slideInfo div
     villainInfo.innerHTML = `<h2>${name}</h2>
-                            <ul class="villain-list">
-                                <li><a class="villain-list-inactive">Agility: ${agility}</a></li>
-                                <li><a class="villain-list-inactive">Intelligence: ${intelligence}</a></li>
-                                <li><a class="villain-list-inactive">Magic: ${magic}</a></li>
-                                <li><a class="villain-list-inactive">Strength: ${strength}</a></li>
-                                <li><a class="villain-list-inactive">Speed: ${speed}</a></li>
-                                <li><a class="villain-list-inactive">Technology: ${technology}</a></li>
+                            <ul id="villainList" class="villain-list">
+                              <li><a class="villain-list-inactive">Agility: ${agility}</a></li>
+                              <li><a class="villain-list-inactive">Intelligence: ${intelligence}</a></li>
+                              <li><a class="villain-list-inactive">Magic: ${magic}</a></li>
+                              <li><a class="villain-list-inactive">Strength: ${strength}</a></li>
+                              <li><a class="villain-list-inactive">Speed: ${speed}</a></li>
+                              <li><a class="villain-list-inactive">Technology: ${technology}</a></li>
                             </ul>`;
+
+  // target select villain button when active
+  var selectVillainButton = document.getElementById('selectVillainButton');
+
+  // change villain button and images styles when villain is selected
+  selectVillainButton.textContent = `${name}`;
+  selectVillainButton.style.border = "4px solid #ecec4d";
+  selectVillainButton.className = "select-villain select-villain-selected";
+  villainImg.firstElementChild.style.border = "4px solid #ecec4d";
 }
 
-var selectVillain = document.getElementById('selectVillainButton'); // target select villain button when active
+
+var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button when active
 // console.log(selectVillain);
-selectVillain.addEventListener('click', showSupervillain, false);
+// selectVillain.addEventListener('click', showSupervillain, false);
 // showSupervillain();
+
+selectVillainButton.addEventListener('click', function(){
+  showSupervillain();
+  // var selectedHeroCatergory = document.querySelector(".selected-catergory").className;
+  // console.log(selectedHeroCatergory);
+  var heroList = document.querySelectorAll("#heroList > li > a");
+  // console.log(heroInfo);
+  var heroListArray = Array.from(heroList);
+  // console.log(heroInfoArray);
+
+  // create variable to store index number of anchor tab with selected-catergory class
+  var selectedCatergoryIndex;
+
+  // create variable to store catergory of anchor tab with selected-catergory class
+  var heroCatergoryScore;
+
+  // get list of anchor elements, convert to array and loop through to collect index number of element with selected-catergory class
+  heroListArray.forEach(function(element, index){
+    // console.log(element.className);
+    if(element.className === "selected-catergory"){
+      selectedCatergoryIndex = index;
+      heroCatergoryScore = element.textContent;
+      // select last character of string and convert to number
+      heroCatergoryScore = parseInt(heroCatergoryScore.charAt(heroCatergoryScore.length-1));
+      console.log(selectedCatergoryIndex);
+      console.log(typeof(heroCatergoryScore));
+    }
+  });
+
+  // create variable to store catergory of anchor tab with selected-catergory class
+  var villainCatergoryScore;
+
+  var villainList = document.querySelectorAll("#villainList > li > a");
+  // console.log(villainList);
+  var villainListArray = Array.from(villainList);
+  // console.log(villainListArray);
+  villainListArray.forEach(function(element, index){
+    if(index === selectedCatergoryIndex){
+      element.className = "selected-catergory";
+      villainCatergoryScore = element.textContent;
+      // select last character of string and convert to number
+      villainCatergoryScore = parseInt(villainCatergoryScore.charAt(villainCatergoryScore.length-1));
+      console.log(typeof(villainCatergoryScore));
+
+    }
+  });
+
+}, false);
+
+
+
 
 // run showSuperhero function with inital slideIndex value when page is fully loaded
 /*window.addEventListener('load', function() {

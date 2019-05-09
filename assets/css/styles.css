@@ -291,7 +291,8 @@ hr {
 	color: #AA112C;
 }
 
-.select-hero-selected {
+.select-hero-selected,
+.select-villain-selected {
 	background-color: #222;
 	border: 4px solid #ecec4d;
 	color: #e47b04;

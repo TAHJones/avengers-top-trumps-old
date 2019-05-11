@@ -272,7 +272,10 @@ function showSupervillain() {
     var technology = supervillain.technology;
 
     // add supervillain property name into template literal HTML image path and insert into villainImg div
-    villainImg.innerHTML = `<img src="assets/img/${supervillainName}.png">`;
+    villainImg.innerHTML = `<img src="assets/img/${supervillainName}.png">
+                            <div class="overlay">
+                              <div class="overlay-text">${villainResult}</div>
+                            </div>`;
 
     // add object property values to template literal HTML and insert into slideInfo div
     villainInfo.innerHTML = `<h2>${name}</h2>
@@ -296,6 +299,65 @@ function showSupervillain() {
 }
 
 
+
+// create variable to store catergory of anchor tab with selected-catergory class
+var heroCatergoryScore;
+
+// create variable to store index number of anchor tab with selected-catergory class
+var selectedCatergoryIndex;
+
+function heroCatergoryScore(){
+  var heroList = document.querySelectorAll("#heroList > li > a"); // get list of anchor elements containing hero catergory scores
+  var heroListArray = Array.from(heroList); // convert heroList nodelist to array
+  heroListArray.forEach(function(element, index){ // loop through array of anchor elements and select element with selected-catergory class name
+    if(element.className === "selected-catergory"){
+      selectedCatergoryIndex = index;
+      heroCatergoryScore = element.textContent;
+      heroCatergoryScore = parseInt(heroCatergoryScore.charAt(heroCatergoryScore.length-1)); // select last character of string and convert to number
+    }
+  });
+}
+
+// create variable to store catergory of anchor element with selected-catergory class
+var villainCatergoryScore;
+
+function villainCatergoryScore(){
+  var villainList = document.querySelectorAll("#villainList > li > a"); // get list of anchor elements containing villain catergory scores
+  var villainListArray = Array.from(villainList); // convert villainList nodelist to array
+  villainListArray.forEach(function(element, index){ // loop through array of anchor elements and select element with selected-catergory class name
+    if(index === selectedCatergoryIndex){
+      element.className = "selected-catergory"; // if index number matches index for hero selected catergory get anchor element with selected-catergory class
+      villainCatergoryScore = element.textContent;
+      villainCatergoryScore = parseInt(villainCatergoryScore.charAt(villainCatergoryScore.length-1)); // select last character of string and convert to number
+    }
+  });
+}
+
+function compareCatergotyScore(){
+    var villainImg = document.getElementById("villainImg");
+    var heroImg = document.getElementById("heroImg");
+
+  function createImgOverlay(result, parentElement){
+    var ImgOverlay = document.createElement("div"); // create new div element
+    ImgOverlay = ImgOverlay.innerHTML = `<div class="overlay">
+                                                <div class="overlay-text">${result}</div>
+                                              </div>`; // insert div element with result variable
+    parentElement.innerHTML += ImgOverlay; // add new overlay element to parent element of img element
+  }
+
+  if(heroCatergoryScore > villainCatergoryScore){
+    createImgOverlay("Winner", heroImg);
+    createImgOverlay("Loser", villainImg);
+  } else if(heroCatergoryScore < villainCatergoryScore){
+    createImgOverlay("Winner", heroImg);
+    createImgOverlay("Loser", villainImg);
+  } else {
+    createImgOverlay("Draw", heroImg);
+    createImgOverlay("Draw", villainImg);
+  }
+}
+
+
 var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button when active
 // console.log(selectVillain);
 // selectVillain.addEventListener('click', showSupervillain, false);
@@ -305,54 +367,27 @@ selectVillainButton.addEventListener('click', function(){
   showSupervillain();
   // var selectedHeroCatergory = document.querySelector(".selected-catergory").className;
   // console.log(selectedHeroCatergory);
-  var heroList = document.querySelectorAll("#heroList > li > a");
-  // console.log(heroInfo);
-  var heroListArray = Array.from(heroList);
-  // console.log(heroInfoArray);
-
-  // create variable to store index number of anchor tab with selected-catergory class
-  var selectedCatergoryIndex;
-
-  // create variable to store catergory of anchor tab with selected-catergory class
-  var heroCatergoryScore;
-
-  // get list of anchor elements, convert to array and loop through to collect index number of element with selected-catergory class
-  heroListArray.forEach(function(element, index){
-    // console.log(element.className);
-    if(element.className === "selected-catergory"){
-      selectedCatergoryIndex = index;
-      heroCatergoryScore = element.textContent;
-      // select last character of string and convert to number
-      heroCatergoryScore = parseInt(heroCatergoryScore.charAt(heroCatergoryScore.length-1));
-      console.log(selectedCatergoryIndex);
-      console.log(typeof(heroCatergoryScore));
-    }
-  });
-
-  // create variable to store catergory of anchor tab with selected-catergory class
-  var villainCatergoryScore;
-
-  var villainList = document.querySelectorAll("#villainList > li > a");
-  // console.log(villainList);
-  var villainListArray = Array.from(villainList);
-  // console.log(villainListArray);
-  villainListArray.forEach(function(element, index){
-    if(index === selectedCatergoryIndex){
-      element.className = "selected-catergory";
-      villainCatergoryScore = element.textContent;
-      // select last character of string and convert to number
-      villainCatergoryScore = parseInt(villainCatergoryScore.charAt(villainCatergoryScore.length-1));
-      console.log(typeof(villainCatergoryScore));
-
-    }
-  });
-
 }, false);
-
-
-
-
 // run showSuperhero function with inital slideIndex value when page is fully loaded
 /*window.addEventListener('load', function() {
     showSuperhero(slideIndex);
 }, false);*/
+
+
+
+  var heroResult, villainResult;
+  var heroImg = document.getElementById("heroImg");
+
+  function createImgOverlay(ImgOverlay, result, parentElement){
+    ImgOverlay = document.createElement("div"); // create new div element
+    ImgOverlay = ImgOverlay.setAttribute("class", "overlay"); // add overlay class
+    ImgOverlay =  ImgOverlay.innerHTML = `<div class="overlay-text">${result}</div>`; // insert div element with result variable
+    parentElement.appendChild(ImgOverlay); // add new overlay element after img element
+  }
+
+  var heroImgOverlay;
+
+  var x = createImgOverlay(heroImgOverlay, "Winner", heroImg);
+
+  console.log(x);
+

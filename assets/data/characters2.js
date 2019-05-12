@@ -4,7 +4,7 @@ var marvelCharacters = {
       name: "Antman",
       agility: 10,
       intelligence: 6,
-      magic: 0,
+      magic: 1,
       strength: 8,
       speed: 6,
       technology: 9
@@ -13,7 +13,7 @@ var marvelCharacters = {
       name: "Black Widow",
       agility: 9,
       intelligence: 8,
-      magic: 0,
+      magic: 1,
       strength: 4,
       speed: 7,
       technology: 6
@@ -22,7 +22,7 @@ var marvelCharacters = {
       name: "Captain America",
       agility: 8,
       intelligence: 7,
-      magic: 0,
+      magic: 1,
       strength: 8,
       speed: 8,
       technology: 4
@@ -30,7 +30,7 @@ var marvelCharacters = {
     captainmarvel: {
       name: "Captain Marvel",
       agility: 7,
-      intelligence: 6,
+      intelligence: 5,
       magic: 8,
       strength: 9,
       speed: 10,
@@ -39,26 +39,26 @@ var marvelCharacters = {
     deadpool: {
       name: "Deadpool",
       agility: 9,
-      intelligence: 7,
-      magic: 0,
+      intelligence: 4,
+      magic: 1,
       strength: 7,
       speed: 10,
-      technology: 0
+      technology: 2
     },
     drstrange: {
       name: "Dr Strange",
-      agility: 3,
+      agility: 5,
       intelligence: 10,
       magic: 10,
       strength: 4,
       speed: 4,
-      technology: 0
+      technology: 1
     },
     falcon: {
       name: "Falcon",
       agility: 5,
       intelligence: 7,
-      magic: 0,
+      magic: 1,
       strength: 6,
       speed: 8,
       technology: 8
@@ -67,7 +67,7 @@ var marvelCharacters = {
       name: "Hawkeye",
       agility: 8,
       intelligence: 7,
-      magic: 0,
+      magic: 1,
       strength: 6,
       speed: 8,
       technology: 4
@@ -76,16 +76,16 @@ var marvelCharacters = {
       name: "Hulk",
       agility: 4,
       intelligence: 2,
-      magic: 0,
+      magic: 1,
       strength: 10,
       speed: 8,
-      technology: 0
+      technology: 1
     },
     ironman: {
       name: "Ironman",
       agility: 7,
       intelligence: 10,
-      magic: 0,
+      magic: 1,
       strength: 9,
       speed: 9,
       technology: 10
@@ -97,13 +97,13 @@ var marvelCharacters = {
       magic: 10,
       strength: 4,
       speed: 7,
-      technology: 0
+      technology: 1
     },
     spiderman: {
       name: "Spiderman",
       agility: 10,
       intelligence: 7,
-      magic: 0,
+      magic: 1,
       strength: 8,
       speed: 10,
       technology: 7
@@ -121,7 +121,7 @@ var marvelCharacters = {
       name: "War Machine",
       agility: 5,
       intelligence: 7,
-      magic: 0,
+      magic: 1,
       strength: 8,
       speed: 8,
       technology: 9
@@ -133,7 +133,7 @@ var marvelCharacters = {
       magic: 9,
       strength: 9,
       speed: 9,
-      technology: 0
+      technology: 1
     }
   },
   supervillains: {
@@ -141,7 +141,7 @@ var marvelCharacters = {
       name: "Black Dwarf",
       agility: 2,
       intelligence: 4,
-      magic: 0,
+      magic: 1,
       strength: 9,
       speed: 4,
       technology: 9
@@ -150,7 +150,7 @@ var marvelCharacters = {
       name: "Dr Doom",
       agility: 7,
       intelligence: 10,
-      magic: 0,
+      magic: 1,
       strength: 9,
       speed: 7,
       technology: 10
@@ -162,7 +162,7 @@ var marvelCharacters = {
       magic: 9,
       strength: 9,
       speed: 7,
-      technology: 0
+      technology: 1
     },
     ebonymaw: {
       name: "Ebony Maw",
@@ -195,7 +195,7 @@ var marvelCharacters = {
       name: "Mandarin",
       agility: 7,
       intelligence: 8,
-      magic: 0,
+      magic: 1,
       strength: 8,
       speed: 7,
       technology: 7
@@ -204,7 +204,7 @@ var marvelCharacters = {
       name: "M.O.D.O.K",
       agility: 5,
       intelligence: 9,
-      magic: 0,
+      magic: 1,
       strength: 2,
       speed: 6,
       technology: 10
@@ -213,7 +213,7 @@ var marvelCharacters = {
       name: "Red Skull",
       agility: 7,
       intelligence: 8,
-      magic: 0,
+      magic: 1,
       strength: 8,
       speed: 8,
       technology: 7
@@ -222,7 +222,7 @@ var marvelCharacters = {
       name: "Thanos",
       agility: 9,
       intelligence: 10,
-      magic: 0,
+      magic: 1,
       strength: 10,
       speed: 9,
       technology: 10
@@ -231,7 +231,7 @@ var marvelCharacters = {
       name: "Ultron",
       agility: 8,
       intelligence: 9,
-      magic: 0,
+      magic: 1,
       strength: 9,
       speed: 9,
       technology: 9
@@ -240,16 +240,16 @@ var marvelCharacters = {
       name: "Venom",
       agility: 8,
       intelligence: 6,
-      magic: 0,
+      magic: 1,
       strength: 9,
       speed: 8,
-      technology: 0
+      technology: 1
     },
     vulture: {
       name: "Vulture",
       agility: 7,
       intelligence: 7,
-      magic: 0,
+      magic: 1,
       strength: 7,
       speed: 8,
       technology: 8
@@ -258,7 +258,7 @@ var marvelCharacters = {
       name: "Whiplash",
       agility: 6,
       intelligence: 8,
-      magic: 0,
+      magic: 1,
       strength: 7,
       speed: 6,
       technology: 8
@@ -267,7 +267,7 @@ var marvelCharacters = {
       name: "Yondu",
       agility: 6,
       intelligence: 7,
-      magic: 0,
+      magic: 1,
       strength: 6,
       speed: 6,
       technology: 9

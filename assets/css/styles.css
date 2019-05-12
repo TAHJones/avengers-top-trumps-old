@@ -80,8 +80,8 @@ hr {
 
 
 .image-slider {
-	/* background-color: #376554; */
-	background-color: #4b5f57;
+	background-color: #500518;
+	/*background-color: #4b5f57;*/
 	border: solid 6px #666;
 	border-radius: 6px;
 	margin: 0 auto;
@@ -124,22 +124,23 @@ hr {
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0%;
-    right: 0%;
-    height: 100%;
-    max-width: 80%;
-    opacity: 0;
-    transition: .5s ease-in-out;
-    background-color: rgba(0, 0, 0, .5);
-    margin: 0 auto;
+	background-color: rgba(0, 0, 0, .5);
+	border-radius: 6px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0%;
+	right: 0%;
+	height: 91%;
+	width: 100%;
+	opacity: 0;
+	/*transition: .5s ease-in-out;*/
+	/*margin: 0 auto;*/
 }
 
 .overlay-text {
     color: #FF9404;
-    font-size: 25px;
+    font-size: 32px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -150,9 +151,9 @@ hr {
     text-shadow: 2px 2px 2px #000;
 }
 
-.overlay-container:hover .overlay {
+/*.overlay-container:hover .overlay {
     opacity: 1;
-}
+}*/
 
 #heroInfo,
 #villainInfo {

@@ -126,7 +126,6 @@ nextSlide.addEventListener('click', function() {
 
 var dots = document.getElementsByClassName("dot"); // target all elements with 'dot' class name
 var hideDots = document.getElementById("dotSelector");
-// console.log(typeof(hideDots));
 
 // get index number of clicked 'dot' div and send to showSuperhero function
 (function currentSlide(n) {
@@ -138,16 +137,6 @@ var hideDots = document.getElementById("dotSelector");
     }, false);
   }
 })(dots); // run currentSlide IIFE function as with collection of 'dot' divs
-
-// currentSlide(dots); // run currentSlide IIFE function as with collection of 'dot' divs
-
-// var selectedSuperhero; // declare selectedSuperhero in global scope
-
-/*var randomNumber = function () {
-  return Math.floor(Math.random() * 15); // generate a random number between 0 and 14 to match index of slides
-}*/
-    // var selectHero = document.getElementById('selectHero');
-    // console.log(selectHero.textContent);
 
 function showSuperhero(n) {
     var superheroList = getSuperheroList();
@@ -162,9 +151,6 @@ function showSuperhero(n) {
 
     var heroImg = document.getElementById('heroImg');
     var heroInfo = document.getElementById('heroInfo');
-    // var selectHero = document.getElementById('selectHero');
-    // console.log(selectHero.textContent);
-
     // use slideIndex number -1 as index no. of return array from getSuperheroList function to select individual superhero property name
     var superheroName = getSuperheroList()[slideIndex-1];
 
@@ -183,9 +169,6 @@ function showSuperhero(n) {
     // add superhero property name into template literal HTML image path and insert into heroImg div
     heroImg.innerHTML = `<img src="assets/img/${superheroName}.png">`;
 
-    // replace inactive styles with active styles when character is selected
-    // selectHeroButton.className = "select-hero select-hero-active";
-
     // add object property values to template literal HTML and insert into heroInfo div
     heroInfo.innerHTML = `<h2>${name}</h2>
                             <ul id="heroList" class="hero-list">
@@ -201,16 +184,9 @@ function showSuperhero(n) {
     var heroInfoList = document.querySelectorAll(".hero-list a");
     var selectHeroButton = document.getElementById('selectHeroButton');
 
-    // selectHeroButton.textContent = `Select Hero`;
-
-    /*if(selectHeroButton.classList.contains("select-hero-selected")){
-      selectHeroButton.textContent = `${name}`;
-    }*/
-
     // each time a new hero is selected reset css styles to inactive if set to active
-    if(selectHeroButton.className = "select-hero select-hero-active"){
+    if(selectHeroButton.className === "select-hero select-hero-active"){
       selectHeroButton.className = "select-hero select-hero-inactive";
-      // selectHeroButton.textContent = `Select Hero`;
     }
 
     // add selected styles to selected catergory
@@ -220,24 +196,20 @@ function showSuperhero(n) {
       }
       // add inactive styles to unselected catergories
       for(var i=0; i<heroInfoList.length; i++){
-        // console.log(heroInfoList[i]);
         if(heroInfoList[i].className === "hero-list-active"){
           heroInfoList[i].className = "hero-list-inactive";
-          // console.log(heroInfoList[i]);
         }
       }
       // replace inactive styles with active styles when superhero catergory is selected
-      if(selectHeroButton.classList.contains("select-hero-selected")){
-        selectHeroButton.className = "select-hero select-hero-selected";
-      } else if ("select-hero select-hero-inactive"){
+      if(selectHeroButton.classList.contains("select-hero-inactive")){
         selectHeroButton.className = "select-hero select-hero-active";
       }
     }, false);
 
     // change hero image border and button styles when hero is selected
     selectHeroButton.addEventListener('click', function(){
-        // add superhero name to 'selectHero' button
-        selectHeroButton.textContent = `${name}`;
+      if(selectHeroButton.classList.contains("select-hero-active")){ // check that button is active before adding changes
+        selectHeroButton.textContent = `${name}`; // add superhero name to 'selectHero' button
         selectHeroButton.style.border = "4px solid #ecec4d";
         selectHeroButton.className = "select-hero select-hero-selected";
         heroImg.firstElementChild.style.border = "4px solid #ecec4d";
@@ -245,14 +217,14 @@ function showSuperhero(n) {
         prevSlide.style.visibility = "hidden";
         nextSlide.style.visibility = "hidden";
         selectVillainButton.className = "select-villain select-villain-active";
-        // console.log(heroImg.firstElementChild);
+      }
     }, false);
-
 }
 
 
-
 function showSupervillain() {
+  var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button
+  if(selectVillainButton.classList.contains("select-villain-active")){ // check that button is active before adding data & changing styles
     var villainImg = document.getElementById('villainImg');
     var villainInfo = document.getElementById('villainInfo');
     var randomNumber =  Math.floor(Math.random() * 15); // generate a random number between 0 and 14 to match index of slides
@@ -272,10 +244,7 @@ function showSupervillain() {
     var technology = supervillain.technology;
 
     // add supervillain property name into template literal HTML image path and insert into villainImg div
-    villainImg.innerHTML = `<img src="assets/img/${supervillainName}.png">
-                            <div class="overlay">
-                              <div class="overlay-text">${villainResult}</div>
-                            </div>`;
+    villainImg.innerHTML = `<img src="assets/img/${supervillainName}.png">`;
 
     // add object property values to template literal HTML and insert into slideInfo div
     villainInfo.innerHTML = `<h2>${name}</h2>
@@ -288,106 +257,109 @@ function showSupervillain() {
                               <li><a class="villain-list-inactive">Technology: ${technology}</a></li>
                             </ul>`;
 
-  // target select villain button when active
-  var selectVillainButton = document.getElementById('selectVillainButton');
-
-  // change villain button and images styles when villain is selected
-  selectVillainButton.textContent = `${name}`;
-  selectVillainButton.style.border = "4px solid #ecec4d";
-  selectVillainButton.className = "select-villain select-villain-selected";
-  villainImg.firstElementChild.style.border = "4px solid #ecec4d";
-}
-
-
-
-// create variable to store catergory of anchor tab with selected-catergory class
-var heroCatergoryScore;
-
-// create variable to store index number of anchor tab with selected-catergory class
-var selectedCatergoryIndex;
-
-function heroCatergoryScore(){
-  var heroList = document.querySelectorAll("#heroList > li > a"); // get list of anchor elements containing hero catergory scores
-  var heroListArray = Array.from(heroList); // convert heroList nodelist to array
-  heroListArray.forEach(function(element, index){ // loop through array of anchor elements and select element with selected-catergory class name
-    if(element.className === "selected-catergory"){
-      selectedCatergoryIndex = index;
-      heroCatergoryScore = element.textContent;
-      heroCatergoryScore = parseInt(heroCatergoryScore.charAt(heroCatergoryScore.length-1)); // select last character of string and convert to number
-    }
-  });
-}
-
-// create variable to store catergory of anchor element with selected-catergory class
-var villainCatergoryScore;
-
-function villainCatergoryScore(){
-  var villainList = document.querySelectorAll("#villainList > li > a"); // get list of anchor elements containing villain catergory scores
-  var villainListArray = Array.from(villainList); // convert villainList nodelist to array
-  villainListArray.forEach(function(element, index){ // loop through array of anchor elements and select element with selected-catergory class name
-    if(index === selectedCatergoryIndex){
-      element.className = "selected-catergory"; // if index number matches index for hero selected catergory get anchor element with selected-catergory class
-      villainCatergoryScore = element.textContent;
-      villainCatergoryScore = parseInt(villainCatergoryScore.charAt(villainCatergoryScore.length-1)); // select last character of string and convert to number
-    }
-  });
-}
-
-function compareCatergotyScore(){
-    var villainImg = document.getElementById("villainImg");
-    var heroImg = document.getElementById("heroImg");
-
-  function createImgOverlay(result, parentElement){
-    var ImgOverlay = document.createElement("div"); // create new div element
-    ImgOverlay = ImgOverlay.innerHTML = `<div class="overlay">
-                                                <div class="overlay-text">${result}</div>
-                                              </div>`; // insert div element with result variable
-    parentElement.innerHTML += ImgOverlay; // add new overlay element to parent element of img element
-  }
-
-  if(heroCatergoryScore > villainCatergoryScore){
-    createImgOverlay("Winner", heroImg);
-    createImgOverlay("Loser", villainImg);
-  } else if(heroCatergoryScore < villainCatergoryScore){
-    createImgOverlay("Winner", heroImg);
-    createImgOverlay("Loser", villainImg);
-  } else {
-    createImgOverlay("Draw", heroImg);
-    createImgOverlay("Draw", villainImg);
+    // change villain button and images styles when villain is selected
+    selectVillainButton.textContent = `${name}`;
+    selectVillainButton.style.border = "4px solid #ecec4d";
+    selectVillainButton.className = "select-villain select-villain-selected";
+    villainImg.firstElementChild.style.border = "4px solid #ecec4d";
   }
 }
 
 
-var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button when active
-// console.log(selectVillain);
-// selectVillain.addEventListener('click', showSupervillain, false);
-// showSupervillain();
+function calculateResult(){
+  var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button
+      var heroCatergoryScore; // create variable to store catergory of anchor tab with selected-catergory class
+      var selectedCatergoryIndex; // create variable to store index number of anchor tab with selected-catergory class
+      (function getHeroCatergoryScore(){ // IIFE function that returns index number and score of selected catergory
+        var heroList = document.querySelectorAll("#heroList > li > a"); // get list of anchor elements containing hero catergory scores
+        var heroListArray = Array.from(heroList); // convert heroList nodelist to array
+        heroListArray.forEach(function(element, index){ // loop through array of anchor elements and select element with selected-catergory class name
+          if(element.className === "selected-catergory"){
+            selectedCatergoryIndex = index;
+            heroCatergoryScore = element.textContent;
+            heroCatergoryScore = parseInt(heroCatergoryScore.charAt(heroCatergoryScore.length-1)); // select last character of string and convert to number
+            heroCatergoryScore === 0 ? heroCatergoryScore = 10 : heroCatergoryScore; // if heroCatergoryScore = 0 convert to 10
+          }
+        });
+    })();
+
+    // create variable to store catergory of anchor element with selected-catergory class
+    var villainCatergoryScore;
+
+    (function getVillainCatergoryScore(heroCatergoryIndex){
+      var villainList = document.querySelectorAll("#villainList > li > a"); // get list of anchor elements containing villain catergory scores
+      var villainListArray = Array.from(villainList); // convert villainList nodelist to array
+      console.log(villainListArray);
+      villainListArray.forEach(function(element, index){ // loop through array of anchor elements and select element with selected-catergory class name
+        if(index === heroCatergoryIndex){
+          var catergoryScoreElement = element;
+          catergoryScoreElement.className = "selected-catergory"; // if index number matches index for hero selected catergory get anchor element with selected-catergory class
+          var catergoryScoreText = element.textContent;
+          villainCatergoryScore = parseInt(catergoryScoreText.charAt(catergoryScoreText.length-1)); // select last character of string and convert to number
+          villainCatergoryScore === 0 ? villainCatergoryScore = 10 : villainCatergoryScore;  // if villainCatergoryScore = 0 convert to 10
+        }
+      });
+    })(selectedCatergoryIndex); // getVillainCatergoryScore function end
+
+    var heroScoreCounter = 0; // variable to record number of times heroes win
+    var villainScoreCounter = 0; // variable to record number of times villains win
+
+    (function compareCatergoryScore(){
+        var villainImg = document.getElementById("villainImg");
+        var heroImg = document.getElementById("heroImg");
+
+      function createImgOverlay(result, parentElement, overlayId){
+        var ImgOverlay = document.createElement("div"); // create new div element
+        ImgOverlay = ImgOverlay.innerHTML = `<div id="${overlayId}" class="overlay">
+                                                    <div class="overlay-text">${result}</div>
+                                                  </div>`; // insert div element with result variable
+        parentElement.innerHTML += ImgOverlay; // add new overlay element to parent element of img element
+      }
+
+      if(heroCatergoryScore > villainCatergoryScore){
+        createImgOverlay("Winner", heroImg, "heroOverlayId");
+        createImgOverlay("Loser", villainImg, "villainOverlayId");
+        heroScoreCounter += 1;
+        villainScoreCounter -= 1;
+        console.log(heroScoreCounter);
+        console.log(villainScoreCounter);
+      } else if(heroCatergoryScore < villainCatergoryScore){
+        createImgOverlay("Loser", heroImg, "heroOverlayId");
+        createImgOverlay("Winner", villainImg, "villainOverlayId");
+        heroScoreCounter -= 1;
+        villainScoreCounter += 1;
+        console.log(heroScoreCounter);
+        console.log(villainScoreCounter);
+      } else {
+        // console.log(heroCatergoryScore);
+        // console.log(villainCatergoryScore);
+        createImgOverlay("Draw", heroImg, "heroOverlayId");
+        createImgOverlay("Draw", villainImg, "villainOverlayId");
+      }
+    })(); // compareCatergoryScore function end
+} // calculateResult function end
+
+function showResult(overlayId){
+  overlayId.style.opacity = "1";
+}
+
+
+var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button
 
 selectVillainButton.addEventListener('click', function(){
-  showSupervillain();
-  // var selectedHeroCatergory = document.querySelector(".selected-catergory").className;
-  // console.log(selectedHeroCatergory);
+   if(selectVillainButton.classList.contains("select-villain-active")){ // only make changes if villain button is active
+    showSupervillain();
+    calculateResult();
+    var heroOverlayId = document.getElementById("heroOverlayId");
+    var villainOverlayId = document.getElementById("villainOverlayId");
+    setTimeout(function(){
+      showResult(heroOverlayId);
+      showResult(villainOverlayId);
+    },2000);
+   }
 }, false);
+
 // run showSuperhero function with inital slideIndex value when page is fully loaded
 /*window.addEventListener('load', function() {
     showSuperhero(slideIndex);
 }, false);*/
-
-
-
-  var heroResult, villainResult;
-  var heroImg = document.getElementById("heroImg");
-
-  function createImgOverlay(ImgOverlay, result, parentElement){
-    ImgOverlay = document.createElement("div"); // create new div element
-    ImgOverlay = ImgOverlay.setAttribute("class", "overlay"); // add overlay class
-    ImgOverlay =  ImgOverlay.innerHTML = `<div class="overlay-text">${result}</div>`; // insert div element with result variable
-    parentElement.appendChild(ImgOverlay); // add new overlay element after img element
-  }
-
-  var heroImgOverlay;
-
-  var x = createImgOverlay(heroImgOverlay, "Winner", heroImg);
-
-  console.log(x);
-

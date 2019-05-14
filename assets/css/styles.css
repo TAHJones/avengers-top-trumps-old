@@ -1,5 +1,7 @@
 /*GENERAL*/
 
+* {box-sizing:border-box}
+
 body {
     background-color: #0a1926;
     font-family: 'Roboto', sans-serif;
@@ -8,14 +10,14 @@ body {
     max-width: 1000px;
 }
 
-section {
+/*section {
     background-color: #000;
     padding: 50px 0 0;
-}
+}*/
 
-section:last-of-type {
+/*section:last-of-type {
     padding-bottom: 50px;
-}
+}*/
 
 p {
     color: #818786;
@@ -66,9 +68,41 @@ hr {
 
 /*GENERAL-END*/
 
-/*IMAGE-SLIDER*/
+/*SCORE-COUNTER*/
 
-* {box-sizing:border-box}
+.score-counter {
+	position: relative;
+	padding: 20px 0;
+	top: -10px;
+}
+
+.score-counter-list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.score-counter-list > li {
+	float: left;
+	display: block;
+	text-align: center;
+	padding: 5px 2px;
+}
+
+.score-counter-list > li > img {
+	margin: 0 auto;
+	width: 30px;
+}
+
+/*SCORE-COUNTER-END*/
+
+
+/*IMAGE-SLIDER*/
 
 /* Slideshow container */
 .hero-slider,
@@ -77,7 +111,6 @@ hr {
   position: relative;
   margin: auto;
 }
-
 
 .image-slider {
 	background-color: #500518;
@@ -88,13 +121,8 @@ hr {
 	padding: 20px;
 	padding-top: 24px;
 	position: relative;
-	height: 650px;
-	/*width: 600px;*/
+	height: 690px;
 }
-/* Hide the images by default */
-/*.hero-slider .slides {
-    display: block;
-}*/
 
 #heroImg,
 #villainImg {
@@ -112,8 +140,8 @@ hr {
   background-color: #000;
   border: 4px solid #222;
   border-radius: 6px;
-	display: block;
-	margin: 0 auto 20px;
+  display: block;
+  margin: 0 auto 20px;
   height: 200px;
   width: 200px;
 }
@@ -413,6 +441,7 @@ hr {
   /*background-color: #D7092DB3;*/
   background-color: rgba(215, 9, 45, 0.5);
 }
+
 
 /*make positioning  of tooptip content relative to parent element*/
 .tooltip {

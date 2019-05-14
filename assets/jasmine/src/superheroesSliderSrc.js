@@ -79,7 +79,7 @@ function getSupervillains(data) {
           alert("Error! Function parameter is a string");
           return data;
         case "object":
-          console.log("Success! Function parameter is an object");
+          // console.log("Success! Function parameter is an object");
           return data.supervillains; // return list of supervillains
       }
   }
@@ -106,19 +106,19 @@ function getSupervillain(name) { // enter supervillain name as function paramete
 
 var slideIndex = 0; // set default value to show first slide
 
-// target anchor element with 'prev' class
+// target anchor element with 'prev' id
 var prevSlide = document.getElementById('prev');
 
-// add click eventlistener to target div with 'prev' class
+// add click eventlistener to target div with 'prev' id
 prevSlide.addEventListener('click', function() {
   slideIndex = slideIndex - 1; // decrease slideIndex value by 1 so previous slide is made visible by showSuperhero function
   showSuperhero(slideIndex); // decrease slideIndex value by 1 so previous slide is made visible by showSuperhero function
 }, false);
 
-// target anchor element with 'next' class
+// target anchor element with 'next' id
 var nextSlide = document.getElementById('next');
 
-// add click eventlistener to target div with 'prev' class
+// add click eventlistener to target div with 'prev' id
 nextSlide.addEventListener('click', function() {
   slideIndex = slideIndex + 1; // increase slideIndex value by 1 so next slide is made visible by showSuperhero function
   showSuperhero(slideIndex);
@@ -265,6 +265,14 @@ function showSupervillain() {
   }
 }
 
+var heroScoreCounter;
+    // var villainScoreCounter = 0; // variable to record number of times villains win
+    if(heroScoreCounter > 0){
+      heroScoreCounter = heroScoreCounter;
+    } else {
+      var heroScoreCounter = 0; // variable to record number of times heroes win
+    }
+
 
 function calculateResult(){
   var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button
@@ -283,13 +291,12 @@ function calculateResult(){
         });
     })();
 
-    // create variable to store catergory of anchor element with selected-catergory class
-    var villainCatergoryScore;
+    var villainCatergoryScore; // create variable to store catergory of anchor element with selected-catergory class
 
     (function getVillainCatergoryScore(heroCatergoryIndex){
       var villainList = document.querySelectorAll("#villainList > li > a"); // get list of anchor elements containing villain catergory scores
       var villainListArray = Array.from(villainList); // convert villainList nodelist to array
-      console.log(villainListArray);
+      // console.log(villainListArray);
       villainListArray.forEach(function(element, index){ // loop through array of anchor elements and select element with selected-catergory class name
         if(index === heroCatergoryIndex){
           var catergoryScoreElement = element;
@@ -301,12 +308,10 @@ function calculateResult(){
       });
     })(selectedCatergoryIndex); // getVillainCatergoryScore function end
 
-    var heroScoreCounter = 0; // variable to record number of times heroes win
-    var villainScoreCounter = 0; // variable to record number of times villains win
 
     (function compareCatergoryScore(){
-        var villainImg = document.getElementById("villainImg");
-        var heroImg = document.getElementById("heroImg");
+      var villainImg = document.getElementById("villainImg");
+      var heroImg = document.getElementById("heroImg");
 
       function createImgOverlay(result, parentElement, overlayId){
         var ImgOverlay = document.createElement("div"); // create new div element
@@ -320,16 +325,36 @@ function calculateResult(){
         createImgOverlay("Winner", heroImg, "heroOverlayId");
         createImgOverlay("Loser", villainImg, "villainOverlayId");
         heroScoreCounter += 1;
-        villainScoreCounter -= 1;
+        // villainScoreCounter -= 1;
         console.log(heroScoreCounter);
-        console.log(villainScoreCounter);
+        // console.log(villainScoreCounter);
+
+        // heroScoreCounter += 1;
+        var powerStoneList = document.querySelectorAll(".score-counter-list > li");
+        // console.log(powerStoneList);
+        var powerStoneArray = Array.from(powerStoneList);
+        // console.log(powerStoneArray);
+        powerStoneArray.forEach(function(element, index){
+          if(index < heroScoreCounter){
+            // element[0];
+            // console.log(element);
+            // console.log(index);
+            var infinityStoneNumber = index + 1;
+            console.log("infinity stone is " + infinityStoneNumber.toString());
+            var infinityStoneId = "infinitystone" + infinityStoneNumber.toString();
+            console.log(infinityStoneId);
+            element.setAttribute("id", infinityStoneId);
+            console.log(element);
+            element.innerHTML = `<img src="assets/img/${infinityStoneId}.png">`;
+          }
+        });
       } else if(heroCatergoryScore < villainCatergoryScore){
         createImgOverlay("Loser", heroImg, "heroOverlayId");
         createImgOverlay("Winner", villainImg, "villainOverlayId");
-        heroScoreCounter -= 1;
-        villainScoreCounter += 1;
-        console.log(heroScoreCounter);
-        console.log(villainScoreCounter);
+        heroScoreCounter = 0;
+        // villainScoreCounter += 1;
+        // console.log(heroScoreCounter);
+        // console.log(villainScoreCounter);
       } else {
         // console.log(heroCatergoryScore);
         // console.log(villainCatergoryScore);
@@ -343,6 +368,60 @@ function showResult(overlayId){
   overlayId.style.opacity = "1";
 }
 
+function resetGame(){
+    var heroImg = document.getElementById('heroImg');
+    var heroInfo = document.getElementById('heroInfo');
+    heroImg.innerHTML = `<img src="assets/img/questionmarkred.png">`; // reset image path back to red question mark image
+    // reset property values back to question mark default and insert into heroInfo div
+    heroInfo.innerHTML = `<h2>Superhero</h2>
+                            <ul id="heroList" class="hero-list">
+                              <li><a class="hero-list-inactive">Agility: ?</a></li>
+                              <li><a class="hero-list-inactive" >Intelligence: ?</a></li>
+                              <li><a class="hero-list-inactive">Magic: ?</a></li>
+                              <li><a class="hero-list-inactive" >Strength: ?</a></li>
+                              <li><a class="hero-list-inactive">Speed: ?</a></li>
+                              <li><a class="hero-list-inactive">Technology: ?</a></li>
+                            </ul>`;
+    var selectHeroButton = document.getElementById("selectHeroButton");
+    selectHeroButton.className = "select-hero select-hero-inactive";
+
+   /* selectHero.innerHTML = `<a id="prev" class="prev">&#10094;</a>
+                            <a id="next" class="next">&#10095;</a>
+                            <button id="selectHeroButton" class="select-hero select-hero-inactive" type="button">Select Hero</button>`;*/
+
+    // var slideIndex = 0; // set default value to show first slide
+    // target anchor element with 'prev' id
+    // var prevSlide = document.getElementById('prev');
+    // target anchor element with 'next' id
+    // var nextSlide = document.getElementById('next');
+    // target div with dotSelector div
+    // var hideDots = document.getElementById("dotSelector");
+    hideDots.style.visibility = "visible";
+    prevSlide.style.visibility = "visible";
+    nextSlide.style.visibility = "visible";
+
+    var villainImg = document.getElementById("villainImg");
+
+    var villainInfo = document.getElementById('villainInfo');
+
+    // add supervillain property name into template literal HTML image path and insert into villainImg div
+    villainImg.innerHTML = `<img src="assets/img/questionmarkgrey.png">`;
+
+    // add object property values to template literal HTML and insert into slideInfo div
+    villainInfo.innerHTML = `<h2>Supervillain</h2>
+                            <ul id="villainList" class="villain-list">
+                              <li><a class="villain-list-inactive">Agility: ?</a></li>
+                              <li><a class="villain-list-inactive">Intelligence: ?</a></li>
+                              <li><a class="villain-list-inactive">Magic: ?</a></li>
+                              <li><a class="villain-list-inactive">Strength: ?</a></li>
+                              <li><a class="villain-list-inactive">Speed: ?</a></li>
+                              <li><a class="villain-list-inactive">Technology: ?</a></li>
+                            </ul>`;
+    var selectVillainButton = document.getElementById("selectVillainButton");
+    // selectVillain.innerHTML = `<button id="selectVillainButton" class="select-villain select-villain-inactive" type="button">Select Villain</button>`;
+    selectVillainButton.className = "select-villain select-villain-inactive";
+
+}
 
 var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button
 
@@ -350,14 +429,38 @@ selectVillainButton.addEventListener('click', function(){
    if(selectVillainButton.classList.contains("select-villain-active")){ // only make changes if villain button is active
     showSupervillain();
     calculateResult();
-    var heroOverlayId = document.getElementById("heroOverlayId");
-    var villainOverlayId = document.getElementById("villainOverlayId");
-    setTimeout(function(){
+    var heroOverlayId = document.getElementById("heroOverlayId"); // target overlay id for hero image
+    var villainOverlayId = document.getElementById("villainOverlayId"); // target overlay id for villain image
+    setTimeout(function(){ // change overlay opacity from 0 to 1 to reveal overlay with result 2 secs after images appear
       showResult(heroOverlayId);
       showResult(villainOverlayId);
+      setTimeout(function(){
+        resetGame();
+      },2000);
     },2000);
    }
 }, false);
+
+        /*var heroScoreCounter = 3;
+        var powerStoneList = document.querySelectorAll(".score-counter-list > li");
+        console.log(powerStoneList);
+        var powerStoneArray = Array.from(powerStoneList);
+        console.log(powerStoneArray);
+        powerStoneArray.forEach(function(element, index){
+          if(index < heroScoreCounter){
+            // element[0];
+            console.log(element);
+            console.log(index);
+            var infinityStoneNumber = index + 1;
+            console.log(infinityStoneNumber);
+            var infinityStoneId = "infinityStone" + infinityStoneNumber.toString();
+            console.log(infinityStoneId);
+            element.setAttribute("id", infinityStoneId);
+            console.log(element);
+            element.innerHTML = `<img src="assets/img/${infinityStoneId}.png">`;
+          }
+        });*/
+
 
 // run showSuperhero function with inital slideIndex value when page is fully loaded
 /*window.addEventListener('load', function() {

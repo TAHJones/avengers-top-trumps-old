@@ -369,9 +369,9 @@ var playAgain = document.getElementById("playAgain");
 function showResultsModal(){
   var infinityStoneName;
 
-  switch(heroScoreCounter) { // return an error for function called with an 'empty' parameter value
+  switch(heroScoreCounter) { // match infinity stone name with counter score number
     case 0:
-      alert("Error! infinityStoneNumber variable is empty");
+      alert("Error! infinityStoneNumber variable is empty");  // return an error for function called with an 'empty' parameter value
       break;
     case 1:
       infinityStoneName = "Power Stone";
@@ -411,7 +411,6 @@ function resetGame(){
     var heroImg = document.getElementById('heroImg');
     var heroInfo = document.getElementById('heroInfo');
     heroImg.innerHTML = `<img src="assets/img/questionmarkred.png">`; // reset image path back to red question mark image
-    // reset property values back to question mark default and insert into heroInfo div
     heroInfo.innerHTML = `<h2>Superhero</h2>
                             <ul id="heroList" class="hero-list">
                               <li><a class="hero-list-inactive">Agility: ?</a></li>
@@ -420,7 +419,7 @@ function resetGame(){
                               <li><a class="hero-list-inactive" >Strength: ?</a></li>
                               <li><a class="hero-list-inactive">Speed: ?</a></li>
                               <li><a class="hero-list-inactive">Technology: ?</a></li>
-                            </ul>`;
+                            </ul>`; // reset property values back to question mark default and insert into heroInfo div
     var selectHeroButton = document.getElementById("selectHeroButton");
     selectHeroButton.className = "select-hero select-hero-inactive";
     selectHeroButton.textContent = "Select Hero";
@@ -428,29 +427,15 @@ function resetGame(){
     var activeDot= document.querySelector("div.active");
     activeDot.classList.remove("active");
 
-   /* selectHero.innerHTML = `<a id="prev" class="prev">&#10094;</a>
-                            <a id="next" class="next">&#10095;</a>
-                            <button id="selectHeroButton" class="select-hero select-hero-inactive" type="button">Select Hero</button>`;*/
-
-    // var slideIndex = 0; // set default value to show first slide
-    // target anchor element with 'prev' id
-    // var prevSlide = document.getElementById('prev');
-    // target anchor element with 'next' id
-    // var nextSlide = document.getElementById('next');
-    // target div with dotSelector div
-    // var hideDots = document.getElementById("dotSelector");
     hideDots.style.visibility = "visible";
     prevSlide.style.visibility = "visible";
     nextSlide.style.visibility = "visible";
 
     var villainImg = document.getElementById("villainImg");
-
     var villainInfo = document.getElementById('villainInfo');
 
-    // add supervillain property name into template literal HTML image path and insert into villainImg div
-    villainImg.innerHTML = `<img src="assets/img/questionmarkgrey.png">`;
+    villainImg.innerHTML = `<img src="assets/img/questionmarkgrey.png">`;  // add supervillain property name into template literal HTML image path and insert into villainImg div
 
-    // add object property values to template literal HTML and insert into slideInfo div
     villainInfo.innerHTML = `<h2>Supervillain</h2>
                             <ul id="villainList" class="villain-list">
                               <li><a class="villain-list-inactive">Agility: ?</a></li>
@@ -459,9 +444,8 @@ function resetGame(){
                               <li><a class="villain-list-inactive">Strength: ?</a></li>
                               <li><a class="villain-list-inactive">Speed: ?</a></li>
                               <li><a class="villain-list-inactive">Technology: ?</a></li>
-                            </ul>`;
+                            </ul>`;  // add object property values to template literal HTML and insert into slideInfo div
     var selectVillainButton = document.getElementById("selectVillainButton");
-    // selectVillain.innerHTML = `<button id="selectVillainButton" class="select-villain select-villain-inactive" type="button">Select Villain</button>`;
     selectVillainButton.className = "select-villain select-villain-inactive";
     selectVillainButton.textContent = "Select Villain";
     selectVillainButton.style.border = "solid 4px #222";
@@ -478,42 +462,21 @@ selectVillainButton.addEventListener('click', function(){
     setTimeout(function(){ // change overlay opacity from 0 to 1 to reveal overlay with result 2 secs after images appear
       showResult(heroOverlayId);
       showResult(villainOverlayId);
-      setTimeout(function(){
-        resetGame();
+      setTimeout(function(){ // show reults modal 3 secs after image overlays appear
+        showResultsModal();
       },2000);
-    },2000);
-    showResultsModal();
+    },3000);
    }
 }, false);
 
 console.log(playAgain);
 
 playAgain.addEventListener('click', function(){
+  resetGame();
   resultsModal.style.display = "none";
   playAgain.style.display = "none";
   // console.log(resultsModal);
 });
-
-        /*var heroScoreCounter = 3;
-        var powerStoneList = document.querySelectorAll(".score-counter-list > li");
-        console.log(powerStoneList);
-        var powerStoneArray = Array.from(powerStoneList);
-        console.log(powerStoneArray);
-        powerStoneArray.forEach(function(element, index){
-          if(index < heroScoreCounter){
-            // element[0];
-            console.log(element);
-            console.log(index);
-            var infinityStoneNumber = index + 1;
-            console.log(infinityStoneNumber);
-            var infinityStoneId = "infinityStone" + infinityStoneNumber.toString();
-            console.log(infinityStoneId);
-            element.setAttribute("id", infinityStoneId);
-            console.log(element);
-            element.innerHTML = `<img src="assets/img/${infinityStoneId}.png">`;
-          }
-        });*/
-
 
 // run showSuperhero function with inital slideIndex value when page is fully loaded
 /*window.addEventListener('load', function() {

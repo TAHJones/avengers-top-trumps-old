@@ -34,11 +34,9 @@
 </head>
 
 <body>
-  <section>
+  <section class="image-slider">
     <div class="row">
       <div class="col-collapse col-xs-10 col-xs-offset-1">
-
-        <section class="image-slider">
 
         <section>
           <div class="row">
@@ -57,13 +55,13 @@
           </div>
         </section>
 
-
-            <div class="row">
-              <div class="col col-xs-5">
-                <div class="hero-slider">
+        <section>
+          <div class="row">
+            <div class="col col-xs-5">
+              <div class="hero-slider">
 
                 <div id="heroImg" class="overlay-container">
-                  <img src="assets/img/questionmarkred.png">
+                  <img src="assets/img/questionmarkgrey.png">
                 </div>
 
                 <!-- The dots/circles -->
@@ -129,17 +127,18 @@
                     <span class="tooltiptext">Vision</span>
                   </div>
                 </div>
+                <!-- The dots/circles-end -->
 
                 <div id="heroInfo">
                   <h2>Superhero</h2>
-                    <ul id="heroList" class="hero-list">
-                      <li><a class="hero-list-inactive">Agility: ?</a></li>
-                      <li><a class="hero-list-inactive" >Intelligence: ?</a></li>
-                      <li><a class="hero-list-inactive">Magic: ?</a></li>
-                      <li><a class="hero-list-inactive" >Strength: ?</a></li>
-                      <li><a class="hero-list-inactive">Speed: ?</a></li>
-                      <li><a class="hero-list-inactive">Technology: ?</a></li>
-                    </ul>
+                  <ul id="heroList" class="hero-list">
+                    <li><a class="hero-list-inactive">Agility: ?</a></li>
+                    <li><a class="hero-list-inactive" >Intelligence: ?</a></li>
+                    <li><a class="hero-list-inactive">Magic: ?</a></li>
+                    <li><a class="hero-list-inactive" >Strength: ?</a></li>
+                    <li><a class="hero-list-inactive">Speed: ?</a></li>
+                    <li><a class="hero-list-inactive">Technology: ?</a></li>
+                  </ul>
                 </div>
 
                 <div id="selectHero"  class="select-hero-bg">
@@ -180,35 +179,34 @@
 
               </div><!--villain-slider-->
             </div><!--col-->
-
           </div><!--row-->
-        </section><!--image-slider-->
+        </section>
+
+        <section class="results-modal-bg">
+          <div class="row">
+            <div class="col col-xs-12">
+              <div id="resultsModal" class="result-modal"></div>
+              <!--<div>-->
+                <button id="playAgain" class="play-again" type="button">Play Again</button>
+              <!--</div>-->
+              <!--<button id="playAgain" class="play-again" type="button">Play Again</button>-->
+            </div>
+          </div>
+        </section>
+
+        <section class="final-result-modal-bg">
+          <div class="row">
+            <div class="col col-xs-12">
+              <div id="finalResultModal" class="final-result-modal"></div>
+            </div>
+          </div>
+        </section>
 
       </div><!--col-->
     </div><!--row-->
-  </section>
+  </section><!--image-slider-->
 
-  <section class="results-modal-bg">
-    <div class="row">
-      <div class="col col-xs-12">
-        <div id="resultsModal" class="result-modal"></div>
-        <!--<div>-->
-          <button id="playAgain" class="play-again" type="button">Play Again</button>
-        <!--</div>-->
-        <!--<button id="playAgain" class="play-again" type="button">Play Again</button>-->
-      </div>
-    </div>
-  </section>
-
-    <section class="final-result-modal-bg">
-    <div class="row">
-      <div class="col col-xs-12">
-        <div id="finalResultModal" class="final-result-modal"></div>
-      </div>
-    </div>
-  </section>
-
-  <script type="text/javascript" src="assets/jasmine/src/superheroesSliderSrc.js"></script>
+  <script type="text/javascript" src="assets/jasmine/src/superheroesSrc2.js"></script>
   <!--<script type="text/javascript" src="assets/js/myScript.js"></script>-->
 </body>
 </html>

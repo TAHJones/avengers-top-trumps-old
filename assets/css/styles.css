@@ -76,7 +76,8 @@ hr {
 	top: -10px;
 }
 
-.score-counter-list {
+.score-counter-list,
+.game-complete-list {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -87,7 +88,8 @@ hr {
     text-shadow: 2px 2px 2px #000;
 }
 
-.score-counter-list > li {
+.score-counter-list > li,
+.game-complete-list > li {
 	float: left;
 	display: block;
 	text-align: center;
@@ -96,12 +98,30 @@ hr {
 
 .score-counter-list > li > img {
 	margin: 0 auto;
-	width: 32px;
+	width: 30px;
 	background-color: #000;
 	border-radius: 2px;
 	padding: 6px;
 }
 
+.game-complete-list > li > img {
+	/* margin: 0 auto; */
+	width: 35px;
+	/* background-color: #000; */
+	/* border-radius: 2px; */
+	padding: 4px;
+	/* border: 4px solid #222; */
+}
+
+.game-complete-list > li > img {
+	/* margin: 0 auto; */
+	width: 31px;
+	background-color: #fff;
+	/* border-radius: 2px; */
+	 padding: 2px;
+	border: 2px solid #222;
+	border-radius: 24px;
+}
 /*SCORE-COUNTER-END*/
 
 
@@ -705,8 +725,8 @@ hr {
 }
 
 .hero-modal-image {
-	width: 50%;
-	margin: 20px auto 30px;
+	width: 45%;
+	margin: 35px auto;
 	display: block;
 	border: solid 4px #888;
 	border-radius: 4px;
@@ -716,7 +736,7 @@ hr {
 
 .result-modal-inner > h2 {
 	text-align: center;
-	margin-bottom: 25px;
+	margin: 20px 0;
 	font-size: 20px;
 	color: #ffa500;
 	text-shadow: 2px 2px 2px #000;
@@ -730,11 +750,14 @@ hr {
 }
 
 .result-modal-inner > p > span {
-	color: #CC1435B3;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 14px;
 	text-shadow: 2px 2px 2px #000;
 }
+
+/*.villain-modal-name {
+	color: #FC0834B3;
+}*/
 
 .infinitystone-modal-image {
 	background-color: #000;
@@ -745,8 +768,46 @@ hr {
 	width: 14%;
 }
 
+/*match color of infinity stone name with image*/
+.power-stone-color {
+	color: #9f7cdc;
+}
+
+.space-stone-color {
+	color: #62c8c3;
+}
+
+.reality-stone-color {
+	color: #ff5151;
+}
+
+.soul-stone-color {
+	color: #fca02e;
+}
+
+.time-stone-color {
+	color: #3eca3e;
+}
+
+.mind-stone-color {
+	color: #ebe84e;
+}
+
+
+@keyframes blink {
+   50% {
+   	/*border-color: #fff;*/
+   	box-shadow: 0 0 10px 1px #eff8b5;
+   	border-color: #eff8b5;
+   }
+}
+
+.blinking-border {
+    animation: blink 1.3s step-end infinite alternate;
+}
+
 .play-again {
-	 background-color: #000;
+	background-color: #000;
 	border: solid 4px #444;
 	border-radius: 6px;
 	color: #AA112C;

@@ -1,4 +1,8 @@
-var apiEndpoint = 'https://gateway.marvel.com:443/v1/public/';
+// var apiEndpoint = 'https://gateway.marvel.com:443/v1/public/';
+var apiEndpoint = 'https://gateway.marvel.com/v1/public/';
+// var apiEndpoint = 'https://gateway.marvel.com/v1/public/comics?apikey=';
+// var apiEndpoint = 'https://gateway.marvel.com:443/v1/public/characters';
+// /v1/public/characters
 var resourceType = 'characters';
 // var superHero = 'Spider-Man';
 var superHero = 'Iron Man';
@@ -6,6 +10,7 @@ var superHero = 'Iron Man';
 // var superHero = 'Hulk';
 // var superHero = 'Thor';
 // var superHero = 'Doctor Strange'; no description
+// var superHero = 'Doctor Strange';
 // var superHero = 'Black Panther'; no description
 // var superHero = 'Hawkeye'; no description
 // var superHero = 'Captain Midlands'; // can't find
@@ -63,10 +68,15 @@ var superHero = 'Iron Man';
 var apiKey = 'e8e6c4f6d9f4f13655a0a25d4649f754';
 
 var apiURL = apiEndpoint + resourceType + '?name=' + superHero + '&apikey=' + apiKey;
+// var apiURL = apiEndpoint + apiKey;
+// var apiURL = apiEndpoint + '&apikey=' + apiKey;
 
-//https://gateway.marvel.com:443/v1/public/characters?name=Ironman&apikey=e8e6c4f6d9f4f13655a0a25d4649f754
+console.log(apiURL);
+
+// var apiURL = 'https://gateway.marvel.com:443/v1/public/characters?name=Ironman&apikey=e8e6c4f6d9f4f13655a0a25d4649f754';
 
 // console.log(apiURL);
+// var apiURL = 'https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=e8e6c4f6d9f4f13655a0a25d4649f754';
 // console.log('https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=e8e6c4f6d9f4f13655a0a25d4649f754');
 
 // get comic character data from the Marvel API using XMLHttpRequest object
@@ -78,6 +88,7 @@ function getMarvelData(callBack) {
             console.log("success!", this.readyState, this.status, this.statusText, this.responseText);
             callBack(JSON.parse(this.responseText));
             // callBack(this.responseText);
+            console.log(this.responseText);
         } else {
             console.log("error!", this.readyState, this.status, this.statusText);
         }
@@ -135,9 +146,9 @@ function marvelData(data) {
     // console.log(fullThumbnailPath);
 
         // marvelList.innerHTML = marvelListData;
-        marvelData.innerHTML = `<div><h2>${marvelName}</h2></div>
+        marvelData.innerHTML = `<div><img src="${fullThumbnailPath}" alt="${marvelName}"></img>
+                                <div><h2>${marvelName}</h2></div>
                                 <div><p>${marvelDescription}</p></div>
-                                <div><img src="${fullThumbnailPath}" alt="${marvelName}" height="200px" width="200px"></img>
                                 <div><ul>${marvelResourceList}</ul></div>`;
                                 // <div><a href="${marvelResources}" target="_blank">${marvelResources}</a></div>
 

@@ -2,254 +2,195 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Avengers top trumps game. Single page web app built using Marvel API">
-    <meta name="author" content="Thomas Jones">
-    <!--<link href="assets/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">-->
-    <link href="https://fonts.googleapis.com/css?family=Cabin|Chakra+Petch|Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/grid.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Avengers top trumps game. Single page web app built using Marvel API">
+  <meta name="author" content="Thomas Jones">
+  <title>Avengers Tops Trumps</title>
 
-    <title>Avengers Top Trumps</title>
+  <!--load fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Chakra|Roboto" rel="stylesheet">
+
+  <!--load stylesheets-->
+  <link rel="stylesheet" href="assets/css/grid.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
 </head>
 
 <body>
+  <header>
+    <h1 class="banner">Avengers Top Trumps</h1>
+  </header>
+  <section class="image-slider">
     <div class="row">
-        <div class="col col-xs-6 col-xs-offset-3">
-            
-             <!-- Slideshow container -->
-            <div class="hero-slider">
-              <!--<div id="heroSliderData" ></div>-->
-            
-              <!-- Full-width images with number and caption text -->
-              <!--<div class="slides fade">
-                <img src="assets/img/ironman.png">
-                <div class="text">Iron Man</div>
-              </div>
-            
-              <div class="slides fade">
-                <img src="assets/img/thor.png">
-                <div class="text">Thor</div>
-              </div>
-            
-              <div class="slides fade">
-                <img src="assets/img/blackwidow.png">
-                <div class="text">Black Widow</div>
-              </div>
-            
-              <div class="slides fade">
-                <img src="assets/img/captainamerica.png">
-                <div class="text">Captain America</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/hulk.png">
-                <div class="text">Hulk</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/hawkeye.png">
-                <div class="text">Hawkeye</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/drstrange.png">
-                <div class="text">Dr Strange</div>
-              </div> 
-              
-              <div class="slides fade">
-                <img src="assets/img/scarletwitch.png">
-                <div class="text">Scarlett Witch</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/warmachine.png">
-                <div class="text">War Machine</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/antman.png">
-                <div class="text">Ant Man</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/vision.png">
-                <div class="text">Vision</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/captainmarvel.png">
-                <div class="text">Captain Marvel</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/falcon.png">
-                <div class="text">Falcon</div>
-              </div>
+      <div class="col-collapse col-xs-10 col-xs-offset-1">
 
-              <div class="slides fade">
-                <img src="assets/img/spiderman.png">
-                <div class="text">Spiderman</div>
-              </div>-->
-              
-              <div class="image-slider">
-                <div id="slideImg"></div>
-                <div id="slideInfo"></div>
-                <button id="selectHeroButton" class="select-hero-button" type="button">Select Hero</button>
-                <a id="prev" class="prev">&#10094;</a>
-                <a id="next" class="next">&#10095;</a>
-              </div>
-
-              <!-- Next and previous buttons -->
-              <div class="slider-scroller">
-                <!--<a id="prev" class="prev">&#10094;</a>-->
-                <!--<a id="next" class="next">&#10095;</a>-->
+        <section>
+          <div class="row">
+            <div class="col col-xs-10 col-xs-offset-1">
+              <div id="scoreCounter" class="score-counter">
+                <ul class="score-counter-list">
+                  <li><img src="assets/img/placeholderinfinitystone.png"></img></li>
+                  <li><img src="assets/img/placeholderinfinitystone.png"></img></li>
+                  <li><img src="assets/img/placeholderinfinitystone.png"></img></li>
+                  <li><img src="assets/img/placeholderinfinitystone.png"></img></li>
+                  <li><img src="assets/img/placeholderinfinitystone.png"></img></li>
+                  <li><img src="assets/img/placeholderinfinitystone.png"></img></li>
+                </ul>
               </div>
             </div>
-            <br>
-            
-            <!-- The dots/circles -->
-            <div id="slideSelector" style="text-align:center">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
+          </div>
+        </section>
+
+        <section>
+          <div class="row">
+            <div class="col col-xs-5">
+              <div class="hero-slider">
+
+                <div id="heroImg" class="overlay-container">
+                  <img src="assets/img/questionmarkorange.png">
+                </div>
+
+                <!-- The dots/circles -->
+                <div id="dotSelector" class="dot-selector">
+                  <div class="dot tooltip antman">
+                    <img class="tooltipimg" src="assets/img/antman.png">
+                    <span class="tooltiptext">Antman</span>
+                  </div>
+                  <div class="dot tooltip blackwidow">
+                    <img class="tooltipimg" src="assets/img/blackwidow.png">
+                    <span class="tooltiptext">Black Widow</span>
+                  </div>
+                  <div class="dot tooltip captainamerica">
+                    <img class="tooltipimg" src="assets/img/captainamerica.png">
+                    <span class="tooltiptext">Captain America</span>
+                  </div>
+                  <div class="dot tooltip captainmarvel">
+                    <img class="tooltipimg" src="assets/img/captainmarvel.png">
+                    <span class="tooltiptext">Captain Marvel</span>
+                  </div>
+                  <div class="dot tooltip deadpool">
+                    <img class="tooltipimg" src="assets/img/deadpool.png">
+                    <span class="tooltiptext">Deadpool</span>
+                  </div>
+                  <div class="dot tooltip drstrange">
+                    <img class="tooltipimg" src="assets/img/drstrange.png">
+                    <span class="tooltiptext">Dr Strange</span>
+                  </div>
+                  <div class="dot tooltip falcon">
+                    <img class="tooltipimg" src="assets/img/falcon.png">
+                    <span class="tooltiptext">Falcon</span>
+                  </div>
+                  <div class="dot tooltip hawkeye">
+                    <img class="tooltipimg" src="assets/img/hawkeye.png">
+                    <span class="tooltiptext">Hawkeye</span>
+                  </div>
+                  <div class="dot tooltip hulk">
+                    <img class="tooltipimg" src="assets/img/hulk.png">
+                    <span class="tooltiptext">Hulk</span>
+                  </div>
+                  <div class="dot tooltip ironman">
+                    <img class="tooltipimg" src="assets/img/ironman.png">
+                    <span class="tooltiptext">Ironman</span>
+                  </div>
+                  <div class="dot tooltip scarletwitch">
+                    <img class="tooltipimg" src="assets/img/scarletwitch.png">
+                    <span class="tooltiptext">Scarlet Witch</span>
+                  </div>
+                  <div class="dot tooltip spiderman">
+                    <img class="tooltipimg" src="assets/img/spiderman.png">
+                    <span class="tooltiptext">Spiderman</span>
+                  </div>
+                  <div class="dot tooltip thor">
+                    <img class="tooltipimg" src="assets/img/thor.png">
+                    <span class="tooltiptext">Thor</span>
+                  </div>
+                  <div class="dot tooltip warmachine">
+                    <img class="tooltipimg" src="assets/img/warmachine.png">
+                    <span class="tooltiptext">War Machine</span>
+                  </div>
+                  <div class="dot tooltip vision">
+                    <img class="tooltipimg" src="assets/img/vision.png">
+                    <span class="tooltiptext">Vision</span>
+                  </div>
+                </div>
+                <!-- The dots/circles-end -->
+
+                <div id="heroInfo">
+                  <h2>Superhero</h2>
+                  <ul id="heroList" class="hero-list">
+                    <li><a class="hero-list-inactive">Agility: ?</a></li>
+                    <li><a class="hero-list-inactive" >Intelligence: ?</a></li>
+                    <li><a class="hero-list-inactive">Magic: ?</a></li>
+                    <li><a class="hero-list-inactive" >Strength: ?</a></li>
+                    <li><a class="hero-list-inactive">Speed: ?</a></li>
+                    <li><a class="hero-list-inactive">Technology: ?</a></li>
+                  </ul>
+                </div>
+
+                <div id="selectHero"  class="select-hero-bg">
+                  <a id="prev" class="prev">&#10094;</a>
+                  <a id="next" class="next">&#10095;</a>
+                  <button id="selectHeroButton" class="select-hero select-hero-inactive" type="button">Select Hero</button>
+                </div>
+
+              </div><!--hero-slider-->
+            </div><!--col-->
+
+            <div class="col col-xs-1">
+              <div class="vs"><span>VS</span></div>
             </div>
-    
-        </div>
 
-        <div class="col col-xs-4 col-xs-offset-1">
-            
-             <!-- Slideshow container -->
-            <div id="selectedHeroSlide" class="selected-hero-slide">
-            
-              <!-- Full-width images with number and caption text -->
-              <!--<div class="slides fade">
-                <img src="assets/img/thanos.png" style="width:100%">
-                <div class="text">Thanos</div>
-              </div>
-            
-              <div class="slides fade">
-                <img src="assets/img/loki.png" style="width:100%">
-                <div class="text">Loki</div>
-              </div>
-            
-              <div class="slides fade">
-                <img src="assets/img/blackdwarf.png" style="width:100%">
-                <div class="text">Black Dwarf</div>
-              </div>
-            
-              <div class="slides fade">
-                <img src="assets/img/redskull.png" style="width:100%">
-                <div class="text">Red Skull</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/dormannu.png" style="width:100%">
-                <div class="text">Dormammu</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/magneto.png" style="width:100%">
-                <div class="text">Magneto</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/mandarin.png" style="width:100%">
-                <div class="text">Mandarin</div>
-              </div> 
-              
-              <div class="slides fade">
-                <img src="assets/img/modok.png" style="width:100%">
-                <div class="text">MODOK</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/ultron.png" style="width:100%">
-                <div class="text">Ultron</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/venom.png" style="width:100%">
-                <div class="text">Venom</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/vulture.png" style="width:100%">
-                <div class="text">Vulture</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/whiplash.png" style="width:100%">
-                <div class="text">Whiplash</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/ebonymaw.png" style="width:100%">
-                <div class="text">Ebony Maw</div>
-              </div>
-              
-              <div class="slides fade">
-                <img src="assets/img/yondu.png" style="width:100%">
-                <div class="text">Yondu</div>
-              </div>
+            <div class="col col-xs-5">
+              <div class="villain-slider">
 
-              <div class="slides fade">
-                <img src="assets/img/drdoom.png" style="width:100%">
-                <div class="text">Dr Doom</div>
-              </div>-->
+                <div id="villainImg" class="overlay-container">
+                  <img src="assets/img/questionmarkorange.png">
+                </div>
 
-              <!-- Next and previous buttons -->
-              <!--<div class="slider-scroller">
-                <a id="prev" class="prev">&#10094;</a>
-                <a id="next" class="next">&#10095;</a>
-              </div>
-            </div>
-            <br>-->
-            
-            <!-- The dots/circles -->
-            <!--<div id="slideSelector" style="text-align:center">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>-->
-            
-            <!--<div id="characterInfo">
-                <ul></ul>
-            </div>-->
-    
-        </div>
-    </div>    
-<!--<img src=""></img>-->
-    <div id="marvelData">Marvel</div>
-    <!--<div id="marvelList"></div>-->
-    <div id="copyRight"></div>
-    <!--<script type="text/javascript" src="assets/js/marvel.js"></script>-->
-    <!--<script type="text/javascript" src="assets/js/ironman.js"></script>-->
-    <!--<script type="text/javascript" src="assets/js/imageslider.js"></script>-->
-    <script type="text/javascript" src="assets/js/characters.js"></script>
-    <!--<script type="text/javascript" src="assets/js/imageslider.js"></script>-->
-    <!--<script type="text/javascript" src="assets/data/avengers.json"></script>-->
+                <div id="villainInfo">
+                  <h2>Supervillain</h2>
+                  <ul id="villainList" class="villain-list">
+                    <li><a class="villain-list-inactive">Agility: ?</a></li>
+                    <li><a class="villain-list-inactive">Intelligence: ?</a></li>
+                    <li><a class="villain-list-inactive">Magic: ?</a></li>
+                    <li><a class="villain-list-inactive">Strength: ?</a></li>
+                    <li><a class="villain-list-inactive">Speed: ?</a></li>
+                    <li><a class="villain-list-inactive">Technology: ?</a></li>
+                  </ul>
+                </div>
+
+                <div id="selectVillain" class="select-villain-bg">
+                  <button id="selectVillainButton" class="select-villain select-villain-inactive" type="button">Select Villain</button>
+                </div>
+
+              </div><!--villain-slider-->
+            </div><!--col-->
+          </div><!--row-->
+        </section>
+
+      </div><!--col-->
+    </div><!--row-->
+  </section><!--image-slider-->
+
+  <section class="results-modal-bg">
+    <div class="row">
+      <div class="col col-xs-12">
+        <div id="resultsModal" class="results-modal"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="marvel-data-bg">
+    <div class="row">
+      <div class="col col-xs-8 col-xs-offset-2">
+        <div id="marvelData" class="marvel-data"></div>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/javascript" src="assets/data/characters.js"></script>
+  <script type="text/javascript" src="assets/js/script.js"></script>
+  <script type="text/javascript" src="assets/js/marvelData.js"></script>
 </body>
 </html>

@@ -9,9 +9,6 @@
   <meta name="author" content="Thomas Jones">
   <title>Jasmine Testing</title>
 
-  <!--load fonts-->
-  <!--<link href="https://fonts.googleapis.com/css?family=Cabin|Chakra+Petch|Roboto" rel="stylesheet">-->
-
   <!--load stylesheets-->
   <link rel="stylesheet" href="assets/css/grid.css" type="text/css" />
   <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
@@ -23,7 +20,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/jasmine.css" />
 
   <!--load scripts-->
-  <script type="text/javascript" src="assets/data/characters2.js"></script>
+  <script type="text/javascript" src="assets/data/characters.js"></script>
   <!--<script type="text/javascript" src="assets/jasmine/mock-ajax/mock-ajax.js"></script>-->
   <!--<script type="text/javascript" src="assets/jasmine/custom-matchers/dom-matchers.js"></script>-->
   <!--<script type="text/javascript" src="assets/jasmine/src/superheroesSrc.js"></script>-->
@@ -34,6 +31,9 @@
 </head>
 
 <body>
+  <header>
+    <h1 class="banner">Avengers Top Trumps</h1>
+  </header>
   <section class="image-slider">
     <div class="row">
       <div class="col-collapse col-xs-10 col-xs-offset-1">
@@ -61,7 +61,7 @@
               <div class="hero-slider">
 
                 <div id="heroImg" class="overlay-container">
-                  <img src="assets/img/questionmarkgrey.png">
+                  <img src="assets/img/questionmarkorange.png">
                 </div>
 
                 <!-- The dots/circles -->
@@ -158,7 +158,7 @@
               <div class="villain-slider">
 
                 <div id="villainImg" class="overlay-container">
-                  <img src="assets/img/questionmarkgrey.png">
+                  <img src="assets/img/questionmarkorange.png">
                 </div>
 
                 <div id="villainInfo">
@@ -182,29 +182,33 @@
           </div><!--row-->
         </section>
 
-        <section class="results-modal-bg">
+        <!--<section class="results-modal-bg">
           <div class="row">
             <div class="col col-xs-12">
               <div id="resultsModal" class="results-modal"></div>
-              <!--<div>-->
-                <!--<button id="playAgain" class="play-again" type="button">Play Again</button>-->
-              <!--</div>-->
-              <!--<button id="playAgain" class="play-again" type="button">Play Again</button>-->
             </div>
           </div>
-        </section>
+        </section>-->
 
-        <section class="final-result-modal-bg">
+        <!--<section class="final-result-modal-bg">
           <div class="row">
             <div class="col col-xs-12">
               <div id="finalResultModal" class="final-result-modal"></div>
             </div>
           </div>
-        </section>
+        </section>-->
 
       </div><!--col-->
     </div><!--row-->
   </section><!--image-slider-->
+
+  <section class="results-modal-bg">
+    <div class="row">
+      <div class="col col-xs-12">
+        <div id="resultsModal" class="results-modal"></div>
+      </div>
+    </div>
+  </section>
 
   <script type="text/javascript" src="assets/jasmine/src/superheroesSrc2.js"></script>
   <!--<script type="text/javascript" src="assets/js/myScript.js"></script>-->

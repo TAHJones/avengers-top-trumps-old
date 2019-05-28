@@ -213,7 +213,7 @@ function showSuperhero(n) {
     selectHeroButton.addEventListener('click', function(){
       if(selectHeroButton.classList.contains("select-hero-active")){ // check that button is active before adding changes
         selectHeroButton.textContent = `${heroName}`; // add superhero name to 'selectHero' button
-        selectHeroButton.style.border = "4px solid #FFA94A";
+        selectHeroButton.style.border = "4px solid #a46e32";
         selectHeroButton.className = "select-hero select-hero-selected";
         heroImg.firstElementChild.style.border = "4px solid #FFA94A";
         hideDots.style.visibility = "hidden";
@@ -264,7 +264,7 @@ function showSupervillain() {
 
     // change villain button and images styles when villain is selected
     selectVillainButton.textContent = `${villainName}`;
-    selectVillainButton.style.border = "4px solid #FFA94A";
+    selectVillainButton.style.border = "4px solid #a46e32";
     selectVillainButton.className = "select-villain select-villain-selected";
     villainImg.firstElementChild.style.border = "4px solid #FFA94A";
   }

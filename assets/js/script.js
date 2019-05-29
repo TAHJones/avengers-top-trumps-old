@@ -104,6 +104,133 @@ function getSupervillain(name) { // enter supervillain name as function paramete
   this.technology = superVillain.technology;
 }
 
+
+// get comic character data from the Marvel API using XMLHttpRequest object
+function getMarvelData(callBack) {
+    // console.log(heroName);
+    // console.log(typeof(superheroName));
+
+  var marvelHero = function(){
+      switch(superheroName) { // match superhero name to marvel api name identifier and add to marvelHero variable
+        case "":
+        case 0:
+        case "0":
+        case null:
+        case false:
+        case "undefined":
+          alert("Error! superheroName variable is empty");  // return an error for function called with an 'empty' parameter value
+          break;
+        case "antman":
+          return 'Ant-Man (Scott Lang)';
+        case "blackwidow":
+          return "Black Widow/Natasha Romanoff (MAA)";
+        case "captainamerica":
+          return "Captain America";
+        case "captainmarvel":
+          return "Captain Marvel (Carol Danvers)";
+        case "deadpool":
+          return "Deadpool";
+        case "drstrange":
+          return "Doctor Strange";
+        case "falcon":
+          return "Falcon";
+        case "hawkeye":
+          return "Hawkeye/Clint Barton (MAA)";
+        case "hulk":
+          return "Hulk";
+        case "ironman":
+          return "Iron Man";
+        case "scarletwitch":
+          return "Scarlet Witch (Ultimate)";
+        case "spiderman":
+          return "Spider-Man";
+        case "thor":
+          return "Thor";
+        case "warmachine":
+          return "War Machine (Ultimate)";
+        case "vision":
+          return "Vision";
+      }
+  };
+
+  var marvelHeroName = marvelHero();
+  var apiEndpoint = 'https://gateway.marvel.com/v1/public/';
+  var resourceType = 'characters';
+  var apiKey = 'e8e6c4f6d9f4f13655a0a25d4649f754';
+  var apiURL = apiEndpoint + resourceType + '?name=' + marvelHeroName + '&apikey=' + apiKey;
+  // var apiURL = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=A&apikey=e8e6c4f6d9f4f13655a0a25d4649f754";
+  // var apiURL = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=A&limit=99&apikey=e8e6c4f6d9f4f13655a0a25d4649f754";
+  // var apiURL = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=Black&limit=99&apikey=e8e6c4f6d9f4f13655a0a25d4649f754";
+  // var apiURL = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=Scarlet&limit=99&apikey=e8e6c4f6d9f4f13655a0a25d4649f754";
+  // var apiURL = apiEndpoint + resourceType + '&apikey=' + apiKey;
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+      if(this.readyState == 4 && this.status == 200) {
+          // console.log("success!", this.readyState, this.status, this.statusText, this.responseText);
+          callBack(JSON.parse(this.responseText));
+          // callBack(this.responseText);
+          console.log(this.responseText);
+      } else {
+          console.log("error!", this.readyState, this.status, this.statusText);
+      }
+  };
+  xhr.open("GET", apiURL, true);
+  xhr.send();
+}
+
+// https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=e8e6c4f6d9f4f13655a0a25d4649f754
+
+// callback function that retrieves comic character data from getMarvelData function and adds to index.html using page section functions
+function showMarvelData(data) {
+    marvelData(data);
+}
+
+// function that...
+function marvelData(data) {
+    var marvelData = document.getElementById('marvelData');
+    var marvelName = data.data.results[0].name;
+    var marvelDescription = data.data.results[0].description;
+    var marvelResources = data.data.results[0].urls;
+    // console.log(marvelResources);
+
+    // loop through array of objects containing external urls and generate list of page links
+    var marvelResourceList;
+    for (var item in marvelResources) {
+        var type = marvelResources[item].type;
+        var url = marvelResources[item].url;
+        marvelResourceList += `<li><a href="${url}" target="_blank">${type}</a></li>`;
+    }
+
+    // removed 'undefined from the beginning of the list'
+    marvelResourceList = marvelResourceList.replace('undefined','');
+
+    var thumbnailPath = data.data.results[0].thumbnail.path;
+    // modifiy path name to https to avoid getting blocked mixed content
+    thumbnailPath = thumbnailPath.replace('http','https');
+    // console.log(thumbnailPath);
+    var thumbnailExtension = data.data.results[0].thumbnail.extension;
+    // var thumbnail = "https://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/portrait_xlarge.jpg";
+
+    // var fullThumbnailPath = thumbnailPath + "/" + portraitLarge + "." + thumbnailExtension;
+    var fullThumbnailPath = thumbnailPath + "." + thumbnailExtension;
+
+        // marvelList.innerHTML = marvelListData;
+        marvelData.innerHTML = `<div><img src="${fullThumbnailPath}" alt="${marvelName}"></img>
+                                <div><h2>${heroName}</h2></div>
+                                <div><p>${marvelDescription}</p></div>
+                                <div><ul>${marvelResourceList}</ul></div>
+                                <button id="marvelDataButton" class="marvel-data-button" type="button">Return to Game</button>`;
+}
+
+
+
+
+
+
+
+
+
 var slideIndex = 0; // set default value to show first slide
 
 // target anchor element with 'prev' id
@@ -170,7 +297,23 @@ function showSuperhero(n) {
     var technology = superhero.technology;
 
     // add superhero property name into template literal HTML image path and insert into heroImg div
-    heroImg.innerHTML = `<img src="assets/img/${superheroName}.png">`;
+    heroImg.innerHTML = `<img src="assets/img/${superheroName}.png">
+                        <div id="infoOverlayId" class="info-overlay">
+                          <button id="infoOverlayButton" class="info-overlay-text">More Info</button>
+                        </div>`;
+
+    var marvelDataBg = document.getElementById("marvelDataBg");
+    var infoOverlayButton = document.getElementById("infoOverlayButton");
+    infoOverlayButton.addEventListener("click", function(){
+      marvelDataBg.classList.remove("marvel-data-hide");
+      marvelDataBg.classList.add("marvel-data-reveal");
+    }, false);
+
+    var marvelDataButton = document.getElementById("marvelDataButton");
+    marvelDataButton.addEventListener("click", function(){
+      marvelDataBg.classList.add("marvel-data-hide");
+      marvelDataBg.classList.remove("marvel-data-reveal");
+    }, false);
 
     // add object property values to template literal HTML and insert into heroInfo div
     heroInfo.innerHTML = `<h2>${heroName}</h2>
@@ -182,6 +325,8 @@ function showSuperhero(n) {
                               <li><a class="hero-list-active">Speed: ${speed}</a></li>
                               <li><a class="hero-list-active">Technology: ${technology}</a></li>
                             </ul>`;
+
+    getMarvelData(showMarvelData); // get marvel api data when hero is shown
 
     var heroInfoLink = document.getElementById("heroList");
     var heroInfoList = document.querySelectorAll(".hero-list a");
@@ -220,6 +365,9 @@ function showSuperhero(n) {
         prevSlide.style.visibility = "hidden";
         nextSlide.style.visibility = "hidden";
         selectVillainButton.className = "select-villain select-villain-active";
+        var infoOverlayId = document.getElementById("infoOverlayId");
+        var infoOverlayParent = infoOverlayId.parentNode;
+        infoOverlayParent.removeChild(infoOverlayId); // remove info overlay when hero is selected
       }
     }, false);
 }
@@ -288,7 +436,7 @@ var villainOverlayId = document.getElementById("villainOverlayId"); // target ov
 
 
 var resultsModal = document.getElementById("resultsModal"); // declare resultsModal in global scope so is available to showResultsModal and playAgain.addEventListener
-var playAgain = document.getElementById("playAgain");
+var playAgainButton = document.getElementById("playAgainButton");
 
 function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergoryScore & compareCatergoryScore IIFE functions
   var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button
@@ -334,11 +482,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
                                                     <div class="overlay-text">${result}</div>
                                                   </div>`; // insert div element with result variable
         parentElement.innerHTML += ImgOverlay; // add new overlay element to parent element of img element
-        // overlayId.style.opacity = "1";
       }
-
-      // var resultsModal = document.getElementById("resultsModal"); // declare resultsModal in global scope so is available to showResultsModal and playAgain.addEventListener
-      // var playAgain = document.getElementById("playAgain");
 
       function showResultsModal(result){
         var infinityStoneName_Won;
@@ -409,7 +553,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
                                       <img class="blinking-border infinitystone-modal-image" src="assets/img/${infinityStoneId}.png">
                                       <p>Collect all six infinity stones to win the game!</p>
                                     </div>
-                                    <button id="playAgain" class="play-again" type="button">Play Again</button>`;
+                                    <button id="playAgainButton" class="play-again-button" type="button">Play Again</button>`;
         } else if (result === "firstResultLose"){
           resultsModal.innerHTML = `<div class="results-modal-inner">
                                       <h2>${villainName} defeats ${heroName}</h2>
@@ -418,7 +562,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
                                       <img class="blinking-border infinitystone-modal-image" src="assets/img/infinitystone2.png">
                                       <p>Collect all six infinity stones to win the game!</p>
                                     </div>
-                                    <button id="playAgain" class="play-again" type="button">Play Again</button>`;
+                                    <button id="playAgainButton" class="play-again-button" type="button">Play Again</button>`;
         } else if (result === "lose"){
           resultsModal.innerHTML = `<div class="results-modal-inner">
                                       <h2>${villainName} defeats ${heroName}</h2>
@@ -427,7 +571,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
                                       <img class="blinking-border infinitystone-modal-image" src="assets/img/${infinityStoneId}.png">
                                       <p>To complete your mission you must regain the ${infinityStoneName_Lost}!</p>
                                     </div>
-                                    <button id="playAgain" class="play-again" type="button">Play Again</button>`;
+                                    <button id="playAgainButton" class="play-again-button" type="button">Play Again</button>`;
         } else if (result == "firstResultDraw"){
           resultsModal.innerHTML = `<div class="results-modal-inner">
                                       <h2>${heroName} draws with ${villainName}</h2>
@@ -436,7 +580,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
                                       <img class="blinking-border infinitystone-modal-image" src="assets/img/infinitystone2.png">
                                       <p>Collect all six infinity stones to win the game!</p>
                                     </div>
-                                    <button id="playAgain" class="play-again" type="button">Play Again</button>`;
+                                    <button id="playAgainButton" class="play-again-button" type="button">Play Again</button>`;
         } else if (result == "draw"){
           resultsModal.innerHTML = `<div class="results-modal-inner">
                                       <h2>${heroName} draws with ${villainName}</h2>
@@ -445,7 +589,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
                                       <img class="blinking-border infinitystone-modal-image" src="assets/img/${infinityStoneId}.png">
                                       <p>Collect all six infinity stones to win the game!</p>
                                     </div>
-                                    <button id="playAgain" class="play-again" type="button">Play Again</button>`;
+                                    <button id="playAgainButton" class="play-again-button" type="button">Play Again</button>`;
         } else if (result === "complete"){
           resultsModal.innerHTML = `<div class="results-modal-inner">
                                       <h2>You are a Top Trumps Champion!</h2>
@@ -462,7 +606,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
                                       </div>
                                       <p>You have collected all six infinity stones and won the game!</p>
                                     </div>
-                                    <button id="playAgain" class="play-again" type="button">Start Again</button>`;
+                                    <button id="playAgainButton" class="play-again-button" type="button">Start Again</button>`;
         } else {
           alert("Error! No result was found");
         }
@@ -497,7 +641,6 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
             alert("Error! No result was found");
           }
           resultsModal.classList.add("modal-fadein");
-          // playAgain.classList.add("modal-fadein");
       } else if(heroCatergoryScore < villainCatergoryScore){
         createImgOverlay("Loser", heroImg, "heroOverlayId");
         createImgOverlay("Winner", villainImg, "villainOverlayId");
@@ -522,7 +665,7 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
           alert("Error! No result was found");
         }
         resultsModal.classList.add("modal-fadein");
-        playAgain.classList.add("modal-fadein");
+        playAgainButton.classList.add("modal-fadein");
     } else if(heroCatergoryScore === villainCatergoryScore) {
       createImgOverlay("Draw", heroImg, "heroOverlayId");
         createImgOverlay("Draw", villainImg, "villainOverlayId");
@@ -540,7 +683,6 @@ function calculateResult(){ // contains getHeroCatergoryScore, getVillainCatergo
           alert("Error! No result was found");
         }
         resultsModal.classList.add("modal-fadein");
-        // playAgain.classList.add("modal-fadein");
       } else {
         alert("Error! No result was found");
       }
@@ -608,6 +750,10 @@ function resetGame(){
     }
 } // resetGame function end
 
+// when page has loaded get data from Marvel API and send to showMarvelData callback function
+// window.addEventListener('load', getMarvelData(showMarvelData), false);
+
+
 var selectVillainButton = document.getElementById('selectVillainButton'); // target select villain button
 
 selectVillainButton.addEventListener('click', function(){
@@ -618,8 +764,16 @@ selectVillainButton.addEventListener('click', function(){
 }, false);
 
 resultsModal.addEventListener('click', function(e){
-  if(e.target.id === "playAgain"){
+  if(e.target.id === "playAgainButton"){
     resultsModal.classList.add("modal-fadeout");
     resetGame();
   }
 },false);
+
+
+
+
+
+
+
+
